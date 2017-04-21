@@ -1,0 +1,14 @@
+.settings
+.project
+*.log*
+*.log
+**/*.iml
+**/.settings
+**/.classpath
+**/.eclipse
+**/.project
+**/target
+**/bin
+MANIFEST.MF
+/.idea/workspace.xml
+/.idea/libraries
