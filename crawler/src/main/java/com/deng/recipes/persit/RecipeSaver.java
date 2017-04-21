@@ -7,7 +7,7 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Created by hcdeng on 2017/4/21.
  */
-public class RecipeSaver {
+public class RecipeSaver implements Runnable{
 
     private final BlockingQueue<RecipeEntity> recipeProvider;
 
@@ -15,5 +15,10 @@ public class RecipeSaver {
         this.recipeProvider = recipeProvider;
     }
 
-
+    @Override
+    public void run() {
+        while(true){
+           // Re
+        }
+    }
 }

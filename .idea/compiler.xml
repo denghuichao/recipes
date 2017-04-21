@@ -10,8 +10,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="crawler" target="1.8" />
-      <module name="recipes" target="1.8" />
+      <module name="crawler" target="1.5" />
+      <module name="recipes" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
