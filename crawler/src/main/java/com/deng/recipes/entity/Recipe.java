@@ -1,10 +1,12 @@
 package com.deng.recipes.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hcdeng on 2017/4/21.
  */
 public class Recipe {
-    private Integer recipeid;
 
     private String name = "";
 
@@ -14,32 +16,24 @@ public class Recipe {
 
     private String taste = "";
 
-    private String setuptime = "";
+    private String setupTime = "";
 
-    private String cookingtime = "";
+    private String cookingTime = "";
 
-    private String mainingredient = "";
+    private List<Ingredient> mainIngredients = new ArrayList<>();
 
-    private String ingredient = "";
+    private List<Ingredient> subIngredients = new ArrayList<>();
 
     private String funcational = "";
 
     private String comment = "";
-
-    public Integer getRecipeid() {
-        return recipeid;
-    }
-
-    public void setRecipeid(Integer recipeid) {
-        this.recipeid = recipeid;
-    }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getImages() {
@@ -47,7 +41,7 @@ public class Recipe {
     }
 
     public void setImages(String images) {
-        this.images = images == null ? null : images.trim();
+        this.images = images;
     }
 
     public String getRecruit() {
@@ -55,7 +49,7 @@ public class Recipe {
     }
 
     public void setRecruit(String recruit) {
-        this.recruit = recruit == null ? null : recruit.trim();
+        this.recruit = recruit;
     }
 
     public String getTaste() {
@@ -63,39 +57,39 @@ public class Recipe {
     }
 
     public void setTaste(String taste) {
-        this.taste = taste == null ? null : taste.trim();
+        this.taste = taste;
     }
 
-    public String getSetuptime() {
-        return setuptime;
+    public String getSetupTime() {
+        return setupTime;
     }
 
-    public void setSetuptime(String setuptime) {
-        this.setuptime = setuptime == null ? null : setuptime.trim();
+    public void setSetupTime(String setupTime) {
+        this.setupTime = setupTime;
     }
 
-    public String getCookingtime() {
-        return cookingtime;
+    public String getCookingTime() {
+        return cookingTime;
     }
 
-    public void setCookingtime(String cookingtime) {
-        this.cookingtime = cookingtime == null ? null : cookingtime.trim();
+    public void setCookingTime(String cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
-    public String getMainingredient() {
-        return mainingredient;
+    public List<Ingredient> getMainIngredients() {
+        return mainIngredients;
     }
 
-    public void setMainingredient(String mainingredient) {
-        this.mainingredient = mainingredient == null ? null : mainingredient.trim();
+    public void addMainIngredient(Ingredient mainIngredient) {
+        this.mainIngredients.add(mainIngredient);
     }
 
-    public String getIngredient() {
-        return ingredient;
+    public List<Ingredient> getSubIngredients() {
+        return subIngredients;
     }
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient == null ? null : ingredient.trim();
+    public void addSubIngredient(Ingredient subIngredients) {
+        this.subIngredients.add(subIngredients);
     }
 
     public String getFuncational() {
@@ -103,7 +97,7 @@ public class Recipe {
     }
 
     public void setFuncational(String funcational) {
-        this.funcational = funcational == null ? null : funcational.trim();
+        this.funcational = funcational;
     }
 
     public String getComment() {
@@ -111,6 +105,6 @@ public class Recipe {
     }
 
     public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+        this.comment = comment;
     }
 }

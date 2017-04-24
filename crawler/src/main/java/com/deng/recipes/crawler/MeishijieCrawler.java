@@ -5,55 +5,79 @@ import com.deng.recipes.entity.CookStep;
 import com.deng.recipes.entity.Ingredient;
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.utils.Constants;
 import com.google.common.base.Preconditions;
-import net.vidageek.crawler.Page;
-import net.vidageek.crawler.Url;
+import edu.uci.ics.crawler4j.crawler.Page;
+import edu.uci.ics.crawler4j.crawler.WebCrawler;
+import edu.uci.ics.crawler4j.parser.HtmlParseData;
+import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
+import java.util.regex.Pattern;
 
 /**
- * Created by hcdeng on 2017/4/21.
+ * Created by hcdeng on 2017/4/24.
  */
-public class MeishijiePageVisitor extends AbstractPageVisitor<RecipeEntity> {
+public class MeishijieCrawler extends WebCrawler {
+    private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
+            + "|png|mp3|mp3|zip|gz))$");
 
+   // private final BlockingQueue<RecipeEntity> resultQueue;
 
-    public MeishijiePageVisitor(BlockingQueue<RecipeEntity> blockingQueue) {
-        super(blockingQueue);
+    public MeishijieCrawler() {
+       // this.resultQueue = blockingQueue;
     }
 
-    public boolean followUrl(Url url) {
-        return url.toString().contains("/zuofa/");
+    @Override
+    public boolean shouldVisit(Page referringPage, WebURL url) {
+        String href = url.getURL().toLowerCase();
+        return !FILTERS.matcher(href).matches()
+                && href.contains("/zuofa/");
     }
 
-    protected RecipeEntity processPage(Page page) {
+    /**
+     * This function is called when a page is fetched and ready
+     * to be processed by your program.
+     */
+    @Override
+    public void visit(Page page) {
+        String url = page.getWebURL().getURL();
+        System.out.println("URL: " + url);
 
-        if (!page.getUrl().contains("/zuofa/")) {
-            return null;
+        if (page.getParseData() instanceof HtmlParseData) {
+            HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+            String html = htmlParseData.getHtml();
+            RecipeEntity recipeEntity = processPageContent(html);
+            if (recipeEntity != null)
+                saveObject(recipeEntity);
         }
-
-        try {
-            FileWriter fileWriter = new FileWriter(
-                    new File("D:\\data\\htmls" + page.getUrl().replaceAll("[^0-9a-zA-Z\\.]", "")));
-            fileWriter.write(page.getContent());
-            fileWriter.close();
-        }catch (IOException e){}
-
-        return processPageContent(page.getContent());
-
-
     }
 
-    private static RecipeEntity processPageContent(String content){
+
+    private void saveObject(RecipeEntity recipeEntity) {
+        FileWriter writer = null;
+        try {
+            try {
+                writer = new FileWriter(Constants.RECIPES_DIR + "/" +
+                        recipeEntity.getRecipe().getName());
+                writer.write(JSON.toJSONString(recipeEntity));
+            } finally {
+                if (writer != null) writer.close();
+            }
+        } catch (IOException e) {
+            System.out.println("fail to save RecipeEntity");
+        }
+    }
+
+    private static RecipeEntity processPageContent(String content) {
         Preconditions.checkNotNull(content);
         Recipe recipe = new Recipe();
         Document doc = Jsoup.parse(content);
@@ -82,8 +106,8 @@ public class MeishijiePageVisitor extends AbstractPageVisitor<RecipeEntity> {
 
         //extract the main ingredient
         tmp = doc.select("div[class=yl zl clearfix] li");
-        if(tmp != null){
-            for(int i = 0; i < tmp.size(); i++){
+        if (tmp != null) {
+            for (int i = 0; i < tmp.size(); i++) {
                 Ingredient ingredient = new Ingredient();
                 Element e = tmp.get(i);
                 ingredient.setIngredientName(e.select("h4 > a").text());
@@ -95,8 +119,8 @@ public class MeishijiePageVisitor extends AbstractPageVisitor<RecipeEntity> {
 
         //extract the sub ingredient
         tmp = doc.select("div[class=yl fuliao clearfix] li");
-        if(tmp != null){
-            for(int i = 0; i < tmp.size(); i++){
+        if (tmp != null) {
+            for (int i = 0; i < tmp.size(); i++) {
                 Ingredient ingredient = new Ingredient();
                 Element e = tmp.get(i);
                 ingredient.setIngredientName(e.select("a").text());
@@ -109,8 +133,8 @@ public class MeishijiePageVisitor extends AbstractPageVisitor<RecipeEntity> {
         //extract steps
         List<CookStep> cookSteps = new ArrayList<>();
         tmp = doc.select("div.content.clearfix");
-        if(tmp != null){
-            for(int i = 0; i < tmp.size(); i++){
+        if (tmp != null) {
+            for (int i = 0; i < tmp.size(); i++) {
                 CookStep cookStep = new CookStep();
                 Element e = tmp.get(i);
                 cookStep.setStepOrder(i);
@@ -120,19 +144,8 @@ public class MeishijiePageVisitor extends AbstractPageVisitor<RecipeEntity> {
             }
         }
 
-        RecipeEntity recipeEntity = new RecipeEntity(recipe,cookSteps);
+        RecipeEntity recipeEntity = new RecipeEntity(recipe, cookSteps);
 
-        return  recipeEntity;
-    }
-
-    public static void main(String[] args) throws IOException{
-        StringBuilder sb = new StringBuilder();
-        Scanner scanner = new Scanner(new File("D:\\data\\htmls\\htmlshttpwww.meishij.netzuofazhuganchaodoupi.html"));
-        while(scanner.hasNextLine()){
-            sb.append(scanner.nextLine()).append("\n\r");
-        }
-        scanner.close();
-
-        System.out.println(JSON.toJSONString(processPageContent(sb.toString())));
+        return recipeEntity;
     }
 }

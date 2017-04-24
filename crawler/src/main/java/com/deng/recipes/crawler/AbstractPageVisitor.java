@@ -29,7 +29,7 @@ public abstract class AbstractPageVisitor<T> implements PageVisitor {
         T t = processPage(page);
         if (t != null)
             try {
-                resultQueue.put(processPage(page));
+                resultQueue.put(t);
             } catch (InterruptedException e) {
                 log.info("fail to put T to blocking queue: " + e.getMessage());
             }

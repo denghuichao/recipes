@@ -41,6 +41,7 @@ public class ImageCrawler{
             while (true) {
                 try {
                     String url = urlProvider.take();
+                    System.out.println("downloading "+url);
                     downloadImageAndSave(url);
                 } catch (InterruptedException e) {
                     log.info("fail to take url from blocking queue: "+e.getMessage());
