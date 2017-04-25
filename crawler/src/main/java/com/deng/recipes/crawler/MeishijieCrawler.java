@@ -1,46 +1,40 @@
 package com.deng.recipes.crawler;
 
-import com.alibaba.fastjson.JSON;
 import com.deng.recipes.entity.CookStep;
 import com.deng.recipes.entity.Ingredient;
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
-import com.deng.recipes.utils.Constants;
+import com.deng.recipes.persit.RecipeSaver;
 import com.google.common.base.Preconditions;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
+import org.elasticsearch.common.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 import java.util.regex.Pattern;
 
 /**
  * Created by hcdeng on 2017/4/24.
  */
 public class MeishijieCrawler extends WebCrawler {
-    private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
-            + "|png|mp3|mp3|zip|gz))$");
+    private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
 
-   // private final BlockingQueue<RecipeEntity> resultQueue;
+    private static final String BASE_URL = "meishij.net";
 
-    public MeishijieCrawler() {
-       // this.resultQueue = blockingQueue;
-    }
+    private static final String RECIPE_PATTERN = "/zuofa/";
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
         return !FILTERS.matcher(href).matches()
-                && href.contains("/zuofa/");
+                && href.contains(BASE_URL);
     }
 
     /**
@@ -49,31 +43,26 @@ public class MeishijieCrawler extends WebCrawler {
      */
     @Override
     public void visit(Page page) {
+
         String url = page.getWebURL().getURL();
-        System.out.println("URL: " + url);
+
+        if (!url.contains(RECIPE_PATTERN))
+            return ;
+
+        System.out.println("visiting: " + url);
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String html = htmlParseData.getHtml();
+
             RecipeEntity recipeEntity = processPageContent(html);
-            if (recipeEntity != null)
-                saveObject(recipeEntity);
-        }
-    }
-
-
-    private void saveObject(RecipeEntity recipeEntity) {
-        FileWriter writer = null;
-        try {
-            try {
-                writer = new FileWriter(Constants.RECIPES_DIR + "/" +
-                        recipeEntity.getRecipe().getName());
-                writer.write(JSON.toJSONString(recipeEntity));
-            } finally {
-                if (writer != null) writer.close();
+            if (recipeEntity != null) {
+                RecipeSaver.saveRecipe(recipeEntity);
+                RecipeSaver.saveHtml(url, html);
             }
-        } catch (IOException e) {
-            System.out.println("fail to save RecipeEntity");
+            else{
+                System.out.println("something bad happened: "+url);
+            }
         }
     }
 
@@ -144,7 +133,8 @@ public class MeishijieCrawler extends WebCrawler {
             }
         }
 
-        RecipeEntity recipeEntity = new RecipeEntity(recipe, cookSteps);
+        RecipeEntity recipeEntity = Strings.isNullOrEmpty(recipe.getName()) || cookSteps.size()==0 ? null :
+                new RecipeEntity(recipe, cookSteps);
 
         return recipeEntity;
     }
