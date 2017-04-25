@@ -2,8 +2,8 @@ package com.deng.recipes.persit;
 
 import com.alibaba.fastjson.JSON;
 import com.deng.recipes.entity.RecipeEntity;
-import com.deng.recipes.utils.Constants;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
@@ -24,8 +24,8 @@ public class RecipeSaver{
         recipeSaver.start();
     }
 
-    public static void saveRecipe(RecipeEntity recipeEntity){
-        String path = Constants.RECIPES_DIR+recipeEntity.getRecipe().getName();
+    public static void saveRecipe(RecipeEntity recipeEntity, String dirPath){
+        String path = dirPath+recipeEntity.getRecipe().getName();
         try{
             recipeProvider.put(new SaveRequest(path, JSON.toJSONString(recipeEntity)));
         }catch (InterruptedException e){
@@ -33,8 +33,8 @@ public class RecipeSaver{
         }
     }
 
-    public static void saveHtml(String url, String html){
-        String path = Constants.HTML_DIR+String.valueOf(url.hashCode())+ UUID.randomUUID()+".html";
+    public static void saveHtml(String url, String html, String dirPath){
+        String path = dirPath+String.valueOf(url.hashCode())+ UUID.randomUUID()+".html";
         try {
             recipeProvider.put(new SaveRequest(path, html));
         }catch (InterruptedException e){
@@ -72,9 +72,8 @@ public class RecipeSaver{
                 writer = new FileWriter(request.filePath);
                 writer.write(request.content);
                 writer.close();
-
             } catch (IOException e) {
-                System.out.println("fail to save RecipeEntity " + e.getMessage() + ", file content: "+request.content);
+                System.out.println("fail to save RecipeEntity " + e.getMessage() );
             }
         }
     }

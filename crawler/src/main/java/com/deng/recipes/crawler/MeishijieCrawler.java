@@ -4,13 +4,7 @@ import com.deng.recipes.entity.CookStep;
 import com.deng.recipes.entity.Ingredient;
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
-import com.deng.recipes.persit.RecipeSaver;
 import com.google.common.base.Preconditions;
-import edu.uci.ics.crawler4j.crawler.Page;
-import edu.uci.ics.crawler4j.crawler.WebCrawler;
-import edu.uci.ics.crawler4j.parser.HtmlParseData;
-import edu.uci.ics.crawler4j.url.WebURL;
-import org.elasticsearch.common.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,50 +17,18 @@ import java.util.regex.Pattern;
 /**
  * Created by hcdeng on 2017/4/24.
  */
-public class MeishijieCrawler extends WebCrawler {
+public final class MeishijieCrawler extends AbstractRecipeCrawler {
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
 
-    private static final String BASE_URL = "meishij.net";
-
-    private static final String RECIPE_PATTERN = "/zuofa/";
-
-    @Override
-    public boolean shouldVisit(Page referringPage, WebURL url) {
-        String href = url.getURL().toLowerCase();
-        return !FILTERS.matcher(href).matches()
-                && href.contains(BASE_URL);
+    public MeishijieCrawler() {
+        BASE_URL = "meishij.net";
+        RECIPE_PATTERN = "/zuofa/";
+        IMAGE_DIR = "D:\\data\\meishijie\\iamges\\";
+        RECIPES_DIR = "D:\\data\\meishijie\\recipes\\";
+        HTML_DIR = "D:\\data\\meishijie\\htmls\\";
     }
 
-    /**
-     * This function is called when a page is fetched and ready
-     * to be processed by your program.
-     */
-    @Override
-    public void visit(Page page) {
-
-        String url = page.getWebURL().getURL();
-
-        if (!url.contains(RECIPE_PATTERN))
-            return ;
-
-        System.out.println("visiting: " + url);
-
-        if (page.getParseData() instanceof HtmlParseData) {
-            HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-            String html = htmlParseData.getHtml();
-
-            RecipeEntity recipeEntity = processPageContent(html);
-            if (recipeEntity != null) {
-                RecipeSaver.saveRecipe(recipeEntity);
-                RecipeSaver.saveHtml(url, html);
-            }
-            else{
-                System.out.println("something bad happened: "+url);
-            }
-        }
-    }
-
-    private static RecipeEntity processPageContent(String content) {
+    protected  RecipeEntity processPageContent(String content) {
         Preconditions.checkNotNull(content);
         Recipe recipe = new Recipe();
         Document doc = Jsoup.parse(content);
@@ -133,8 +95,7 @@ public class MeishijieCrawler extends WebCrawler {
             }
         }
 
-        RecipeEntity recipeEntity = Strings.isNullOrEmpty(recipe.getName()) || cookSteps.size()==0 ? null :
-                new RecipeEntity(recipe, cookSteps);
+        RecipeEntity recipeEntity = new RecipeEntity(recipe, cookSteps);
 
         return recipeEntity;
     }

@@ -10,9 +10,13 @@ public class Recipe {
 
     private String name = "";
 
+    private String desc = "";
+
     private String images = "";
 
-    private String recruit = "";
+    private String recruit = "";//难度等级
+
+    private String cookMethod = "";
 
     private String taste = "";
 
@@ -26,7 +30,9 @@ public class Recipe {
 
     private String funcational = "";
 
-    private String comment = "";
+    private String tips = "";
+
+    private String score = "";// 评分
 
     public String getName() {
         return name;
@@ -100,11 +106,43 @@ public class Recipe {
         this.funcational = funcational;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getCookMethod() {
+        return cookMethod;
+    }
+
+    public void setCookMethod(String cookMethod) {
+        this.cookMethod = cookMethod;
+    }
+
+    public void setMainIngredients(List<Ingredient> mainIngredients) {
+        this.mainIngredients = mainIngredients;
+    }
+
+    public void setSubIngredients(List<Ingredient> subIngredients) {
+        this.subIngredients = subIngredients;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 }

@@ -35,7 +35,6 @@ public class ImgCrawler {
         }
     }
 
-
     private static class ImageDownloader implements Runnable{
         public void run() {
             while (true) {
