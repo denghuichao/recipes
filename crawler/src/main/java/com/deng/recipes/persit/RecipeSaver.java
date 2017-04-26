@@ -35,7 +35,7 @@ public class RecipeSaver {
     }
 
     public static void saveHtml(String url, String html, String dirPath) {
-        String path = dirPath + String.valueOf(url.hashCode()) + UUID.randomUUID() + ".html";
+        String path = dirPath + FileUtils.getMD5(html) + ".html";
         try {
             recipeProvider.put(new SaveRequest(path, html));
         } catch (InterruptedException e) {
