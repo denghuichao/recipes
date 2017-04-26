@@ -44,33 +44,17 @@ public class MeishijieRecipeExtractor implements RecipeExtractor{
         tmp = doc.select("div.materials > p"); //功能
         recipe.setFuncational(tmp.text());
 
-        //extract the main ingredient
-        tmp = doc.select("div[class=yl zl clearfix] li");
-        if (tmp != null) {
-            for (int i = 0; i < tmp.size(); i++) {
-                Ingredient ingredient = new Ingredient();
-                Element e = tmp.get(i);
-                ingredient.setIngredientName(e.select("h4 > a").text());
-                ingredient.setUrl(e.select("img").attr("src"));
-                ingredient.setQuantityDesc(e.select("span").text());
-                recipe.addIngredient(ingredient);
-            }
-        }
+        extractMainIgredients(recipe, doc);
+        extractSubIngredients(recipe, doc);
+        List<CookStep> cookSteps = extractCookSteps(doc);
 
-        //extract the sub ingredient
-        tmp = doc.select("div[class=yl fuliao clearfix] li");
-        if (tmp != null) {
-            for (int i = 0; i < tmp.size(); i++) {
-                Ingredient ingredient = new Ingredient();
-                Element e = tmp.get(i);
-                ingredient.setIngredientName(e.select("a").text());
-                ingredient.setQuantityDesc(e.select("span").text());
-                recipe.addIngredient(ingredient);
-            }
-        }
+        RecipeEntity recipeEntity = new RecipeEntity(recipe, cookSteps);
 
+        return recipeEntity;
+    }
 
-        //extract steps
+    private List<CookStep> extractCookSteps(Document doc) {
+        Elements tmp;//extract steps
         List<CookStep> cookSteps = new ArrayList<>();
         tmp = doc.select("div.content.clearfix");
         if (tmp != null) {
@@ -83,9 +67,35 @@ public class MeishijieRecipeExtractor implements RecipeExtractor{
                 cookSteps.add(cookStep);
             }
         }
+        return cookSteps;
+    }
 
-        RecipeEntity recipeEntity = new RecipeEntity(recipe, cookSteps);
+    private void extractSubIngredients(Recipe recipe, Document doc) {
+        Elements tmp;//extract the sub ingredient
+        tmp = doc.select("div[class=yl fuliao clearfix] li");
+        if (tmp != null) {
+            for (int i = 0; i < tmp.size(); i++) {
+                Ingredient ingredient = new Ingredient();
+                Element e = tmp.get(i);
+                ingredient.setIngredientName(e.select("a").text());
+                ingredient.setQuantityDesc(e.select("span").text());
+                recipe.addIngredient(ingredient);
+            }
+        }
+    }
 
-        return recipeEntity;
+    private void extractMainIgredients(Recipe recipe, Document doc) {
+        Elements tmp;//extract the main ingredient
+        tmp = doc.select("div[class=yl zl clearfix] li");
+        if (tmp != null) {
+            for (int i = 0; i < tmp.size(); i++) {
+                Ingredient ingredient = new Ingredient();
+                Element e = tmp.get(i);
+                ingredient.setIngredientName(e.select("h4 > a").text());
+                ingredient.setUrl(e.select("img").attr("src"));
+                ingredient.setQuantityDesc(e.select("span").text());
+                recipe.addIngredient(ingredient);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.deng.recipes.persit;
 
 import com.alibaba.fastjson.JSON;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.utils.FileUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,9 +25,10 @@ public class RecipeSaver {
     }
 
     public static void saveRecipe(RecipeEntity recipeEntity, String dirPath) {
-        String path = dirPath + recipeEntity.getRecipe().getTitle();
+        String content = JSON.toJSONString(recipeEntity);
+        String path = dirPath + FileUtils.getMD5(content);
         try {
-            recipeProvider.put(new SaveRequest(path, JSON.toJSONString(recipeEntity)));
+            recipeProvider.put(new SaveRequest(path, content));
         } catch (InterruptedException e) {
             System.out.println("fail to submit RecipeEntity");
         }

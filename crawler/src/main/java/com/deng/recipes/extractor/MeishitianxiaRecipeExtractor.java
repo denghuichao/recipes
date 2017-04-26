@@ -34,7 +34,7 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
 
         Element de = doc.getElementById("block_txt1");
         if (de != null) {
-            String desc = de.text().replaceAll("\"|“|”", "");//.select("div.");
+            String desc = de.text();//.select("div.");
             recipe.setDesc(desc);
             System.out.println(desc);
         }
@@ -55,15 +55,17 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
         String tips = doc.select("div.recipeTip").text();
         recipe.setTips(tips);
         System.out.println(tips);
-        return new RecipeEntity(recipe, steps);
+        return steps.size() == 0 ? null : new RecipeEntity(recipe, steps);
     }
 
     private void extractTags(Recipe recipe, Document doc) {
         Element tmp = doc.getElementById("path");
-        Elements as = tmp.select("a");
-        for (int i = 2; i < as.size(); i++) {
-            String tag = as.get(i).text();
-            recipe.addTag(tag);
+        if(tmp != null) {
+            Elements as = tmp.select("a");
+            for (int i = 2; i < as.size(); i++) {
+                String tag = as.get(i).text();
+                recipe.addTag(tag);
+            }
         }
     }
 
@@ -111,10 +113,6 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        processAllRecipes(new File("D:\\data\\meishitianxia\\htmls-0425"), new MeishitianxiaRecipeExtractor());
-    }
-
     public static void processAllRecipes(File fs, RecipeExtractor extractor) throws IOException {
         if (fs.isDirectory()) {
             for (File f : fs.listFiles()) {
@@ -124,7 +122,13 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
             System.out.println(fs.getAbsolutePath());
             String content = FileUtils.readFile(fs.getAbsolutePath());
             RecipeEntity entity = extractor.extract(content);
-            RecipeSaver.saveRecipe(entity, "D:\\data\\meishitianxia\\recipes\\");
+            if(entity!=null) {
+                RecipeSaver.saveRecipe(entity, "D:\\data\\meishitianxia\\recipes\\");
+            }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        processAllRecipes(new File("D:\\data\\meishitianxia\\htmls-0425"), new MeishitianxiaRecipeExtractor());
     }
 }

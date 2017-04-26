@@ -5,19 +5,22 @@ import info.monitorenter.cpdetector.io.*;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by hcdeng on 2017/4/21.
  */
 public class FileUtils {
 
-    private FileUtils(){}
+    private FileUtils() {
+    }
 
-    public static String url2FileName(String url){
+    public static String url2FileName(String url) {
         Preconditions.checkNotNull(url);
 
         int dotIdx = url.lastIndexOf('/');
-        if(dotIdx < 0)dotIdx = 0;
+        if (dotIdx < 0) dotIdx = 0;
 
         return url.hashCode() + url.substring(dotIdx);
     }
@@ -52,5 +55,32 @@ public class FileUtils {
         } finally {
             return charset.name();
         }
+    }
+
+    public static String getMD5(String input) {
+        try {
+            // 如果想要SHA1参数换成”SHA1”）
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+            byte[] inputByteArray = input.getBytes();
+            messageDigest.update(inputByteArray);
+            byte[] resultByteArray = messageDigest.digest();
+            return byteArrayToHex(resultByteArray);
+
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+
+    public static String byteArrayToHex(byte[] byteArray) {
+        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        char[] resultCharArray = new char[byteArray.length * 2];
+        int index = 0;
+        for (byte b : byteArray) {
+
+            resultCharArray[index++] = hexDigits[b >>> 4 & 0xf];
+            resultCharArray[index++] = hexDigits[b & 0xf];
+        }
+        return new String(resultCharArray);
     }
 }

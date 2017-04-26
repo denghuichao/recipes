@@ -86,7 +86,6 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
-
     public String getFuncational() {
         return funcational;
     }
@@ -123,6 +122,14 @@ public class Recipe {
 
     public void addTag(String tag){
         this.tags.add(tag);
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 
     public String getTips() {
