@@ -21,8 +21,6 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
     protected String RECIPES_DIR;
     protected String HTML_DIR;
 
-    public AbstractRecipeCrawler() {
-    }
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
@@ -31,13 +29,12 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
                 && href.contains(BASE_URL);
     }
 
-
     @Override
     public void visit(Page page) {
 
         String url = page.getWebURL().getURL();
 
-        if (!url.contains(RECIPE_PATTERN))
+        if (!url.matches(RECIPE_PATTERN))
             return;
 
         System.out.println("visiting: " + url);

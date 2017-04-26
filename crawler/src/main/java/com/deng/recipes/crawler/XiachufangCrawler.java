@@ -12,7 +12,7 @@ public final class XiachufangCrawler extends AbstractRecipeCrawler{
 
     public XiachufangCrawler() {
         BASE_URL = "xiachufang.com";
-        RECIPE_PATTERN = "/recipe/";
+        RECIPE_PATTERN = ".*/recipe/\\d+/$";
         IMAGE_DIR = "D:\\data\\xiachufang\\iamges\\";
         RECIPES_DIR = "D:\\data\\xiachufang\\recipes\\";
         HTML_DIR = "D:\\data\\xiachufang\\htmls\\";

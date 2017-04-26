@@ -1,18 +1,20 @@
 package com.deng.recipes.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hcdeng on 2017/4/21.
  */
 public class Recipe {
 
-    private String name = "";
+    private String title = "";
 
     private String desc = "";
 
-    private String images = "";
+    private List<String> images = new ArrayList<>();
 
     private String recruit = "";//难度等级
 
@@ -24,29 +26,31 @@ public class Recipe {
 
     private String cookingTime = "";
 
-    private List<Ingredient> mainIngredients = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
 
-    private List<Ingredient> subIngredients = new ArrayList<>();
+    private Set<String> tags = new HashSet<>();
 
     private String funcational = "";
 
     private String tips = "";
 
-    private String score = "";// 评分
+    private Float score ;// 评分
 
-    public String getName() {
-        return name;
+    private Integer hot ;//人气
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 
@@ -82,21 +86,6 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
-    public List<Ingredient> getMainIngredients() {
-        return mainIngredients;
-    }
-
-    public void addMainIngredient(Ingredient mainIngredient) {
-        this.mainIngredients.add(mainIngredient);
-    }
-
-    public List<Ingredient> getSubIngredients() {
-        return subIngredients;
-    }
-
-    public void addSubIngredient(Ingredient subIngredients) {
-        this.subIngredients.add(subIngredients);
-    }
 
     public String getFuncational() {
         return funcational;
@@ -122,12 +111,18 @@ public class Recipe {
         this.cookMethod = cookMethod;
     }
 
-    public void setMainIngredients(List<Ingredient> mainIngredients) {
-        this.mainIngredients = mainIngredients;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setSubIngredients(List<Ingredient> subIngredients) {
-        this.subIngredients = subIngredients;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient){this.ingredients.add(ingredient);}
+
+    public void addTag(String tag){
+        this.tags.add(tag);
     }
 
     public String getTips() {
@@ -138,11 +133,19 @@ public class Recipe {
         this.tips = tips;
     }
 
-    public String getScore() {
+    public Float getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Float score) {
         this.score = score;
+    }
+
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
     }
 }

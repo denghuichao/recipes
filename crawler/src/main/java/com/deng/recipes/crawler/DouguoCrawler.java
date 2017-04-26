@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class DouguoCrawler extends AbstractRecipeCrawler{
     public DouguoCrawler() {
         BASE_URL = "douguo.com/";
-        RECIPE_PATTERN = "/cookbook/";
+        RECIPE_PATTERN = ".*/cookbook/\\d+\\.html$";
         IMAGE_DIR = "D:\\data\\douguo\\iamges\\";
         RECIPES_DIR = "D:\\data\\douguo\\recipes\\";
         HTML_DIR = "D:\\data\\douguo\\htmls\\";

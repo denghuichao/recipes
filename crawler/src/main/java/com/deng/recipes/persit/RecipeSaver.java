@@ -3,7 +3,6 @@ package com.deng.recipes.persit;
 import com.alibaba.fastjson.JSON;
 import com.deng.recipes.entity.RecipeEntity;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
@@ -13,7 +12,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 /**
  * Created by hcdeng on 2017/4/21.
  */
-public class RecipeSaver{
+public class RecipeSaver {
 
     private static BlockingQueue<SaveRequest> recipeProvider = new LinkedBlockingDeque<>();
 
@@ -24,25 +23,25 @@ public class RecipeSaver{
         recipeSaver.start();
     }
 
-    public static void saveRecipe(RecipeEntity recipeEntity, String dirPath){
-        String path = dirPath+recipeEntity.getRecipe().getName();
-        try{
+    public static void saveRecipe(RecipeEntity recipeEntity, String dirPath) {
+        String path = dirPath + recipeEntity.getRecipe().getTitle();
+        try {
             recipeProvider.put(new SaveRequest(path, JSON.toJSONString(recipeEntity)));
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println("fail to submit RecipeEntity");
         }
     }
 
-    public static void saveHtml(String url, String html, String dirPath){
-        String path = dirPath+String.valueOf(url.hashCode())+ UUID.randomUUID()+".html";
+    public static void saveHtml(String url, String html, String dirPath) {
+        String path = dirPath + String.valueOf(url.hashCode()) + UUID.randomUUID() + ".html";
         try {
             recipeProvider.put(new SaveRequest(path, html));
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println("fail to submit html");
         }
     }
 
-    private static class SaveRequest{
+    private static class SaveRequest {
         private final String filePath;
         private final String content;
 
@@ -65,15 +64,16 @@ public class RecipeSaver{
                 }
             }
         }
+
         private void saveFile(SaveRequest request) {
             FileWriter writer = null;
             try {
-                System.out.println("saving "+request.filePath);
+                System.out.println("saving " + request.filePath);
                 writer = new FileWriter(request.filePath);
                 writer.write(request.content);
                 writer.close();
             } catch (IOException e) {
-                System.out.println("fail to save RecipeEntity " + e.getMessage() );
+                System.out.println("fail to save RecipeEntity " + e.getMessage());
             }
         }
     }

@@ -1,18 +1,21 @@
 package com.deng.recipes.crawler;
 
-import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.extractor.MeishitianxiaRecipeExtractor;
+import com.deng.recipes.extractor.RecipeExtractor;
+import com.google.common.base.Preconditions;
 
-import java.util.ArrayList;
 
 /**
  * Created by hcdeng on 2017/4/25.
  */
 public class MeishitianxiaCrawler extends AbstractRecipeCrawler{
 
+    private RecipeExtractor recipeExtractor = new MeishitianxiaRecipeExtractor();
+
     public MeishitianxiaCrawler() {
         BASE_URL = "meishichina.com";
-        RECIPE_PATTERN = "/recipe-";
+        RECIPE_PATTERN = ".*/recipe-\\d+\\.html$";
         IMAGE_DIR = "D:\\data\\meishitianxia\\iamges\\";
         RECIPES_DIR = "D:\\data\\meishitianxia\\recipes\\";
         HTML_DIR = "D:\\data\\meishitianxia\\htmls\\";
@@ -20,6 +23,7 @@ public class MeishitianxiaCrawler extends AbstractRecipeCrawler{
 
     @Override
     protected RecipeEntity processPageContent(String html) {
-        return new RecipeEntity(new Recipe(), new ArrayList<>());
+        Preconditions.checkNotNull(html);
+        return recipeExtractor.extract(html);
     }
 }

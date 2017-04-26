@@ -10,7 +10,6 @@
     <artifactId>crawler</artifactId>
     <packaging>jar</packaging>
 
-    <name>crawler</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -21,14 +20,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-exec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-email</artifactId>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -87,6 +78,21 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cpdetector</groupId>
+            <artifactId>cpdetector</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.jchardet</groupId>
+            <artifactId>jchardet</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
         </dependency>
 
     </dependencies>

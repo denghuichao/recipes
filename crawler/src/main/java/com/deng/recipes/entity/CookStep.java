@@ -11,6 +11,14 @@ public class CookStep {
 
     private String image = "";
 
+    public CookStep(Integer stepOrder, String description, String image) {
+        this.stepOrder = stepOrder;
+        this.description = description;
+        this.image = image;
+    }
+
+    public CookStep() {
+    }
 
     public Integer getStepOrder() {
         return stepOrder;

@@ -1,7 +1,6 @@
 package com.deng.recipes.crawler;
 
-import com.deng.recipes.utils.Constants;
-import com.deng.recipes.utils.FilePathUtils;
+import com.deng.recipes.utils.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -13,23 +12,35 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class ImgCrawler {
 
-    static Logger log = Logger.getLogger(ImageCrawler.class);
-    private static final BlockingQueue<String> urlProvider = new LinkedBlockingDeque<String>();
-    private static Thread imageDownloader;
+    static Logger log = Logger.getLogger(ImgCrawler.class);
+    private static final BlockingQueue<Request> urlProvider = new LinkedBlockingDeque<Request>();
+    private static Executor imageDownloader;
 
     static {
-        imageDownloader = new Thread(new ImageDownloader());
-        imageDownloader.start();
+        imageDownloader = Executors.newSingleThreadExecutor();
+        imageDownloader.execute(new ImageDownloader());
     }
 
-    public static void commit(String imgUrl){
+    private static class Request{
+        private final String url;
+        private final String imgDir;
+
+        public Request(String url, String imgDir) {
+            this.url = url;
+            this.imgDir = imgDir;
+        }
+    }
+
+    public static void commit(String imgUrl, String imgDir){
         try {
-            urlProvider.put(imgUrl);
+            urlProvider.put(new Request(imgUrl, imgDir));
         }catch (InterruptedException e){
             log.info("fail to commit img url to blocking queue: "+e.getMessage());
         }
@@ -39,18 +50,19 @@ public class ImgCrawler {
         public void run() {
             while (true) {
                 try {
-                    String url = urlProvider.take();
-                    System.out.println("downloading "+url);
-                    downloadImageAndSave(url);
+                    Request request = urlProvider.take();
+                    System.out.println("downloading "+request.url);
+                    downloadImageAndSave(request);
                 } catch (InterruptedException e) {
                     log.info("fail to take url from blocking queue: "+e.getMessage());
                 }
             }
         }
 
-        private void downloadImageAndSave(String url){
+        private void downloadImageAndSave(Request request){
+            String url = request.url;
+            String filePath = request.imgDir + FileUtils.url2FileName(url);
 
-            String filePath = FilePathUtils.urlPath2LocalPath(url, Constants.IMAGE_DIR);
             File file = new File(filePath);
 
             if(!file.exists()){
