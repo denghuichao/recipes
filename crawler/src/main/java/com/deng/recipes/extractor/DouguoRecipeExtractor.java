@@ -24,6 +24,7 @@ import java.util.List;
  * Created by hcdeng on 2017/4/26.
  */
 public class DouguoRecipeExtractor implements RecipeExtractor {
+
     @Override
     public RecipeEntity extract(String content) {
         Preconditions.checkNotNull(content);
@@ -89,11 +90,15 @@ public class DouguoRecipeExtractor implements RecipeExtractor {
             String url = "";
             if (Strings.isNullOrEmpty(key)) continue;
 
-            if (key.contains("难度")) {
-                value = e.text().substring(key.length());
+            if (key.contains("难度") ) {
+                value = e.text();
+                if(value.length() >key.length())
+                    value = value.substring(key.length());
                 recipe.setRecruit(value);
             } else if (key.contains("时间")) {
-                value = e.text().substring(key.length());
+                value = e.text();
+                if(value.length() >key.length())
+                    value = value.substring(key.length());
                 recipe.setCookingTime(value);
             } else {
                 key = ke.get(0).text();
@@ -118,6 +123,10 @@ public class DouguoRecipeExtractor implements RecipeExtractor {
             if (entity != null) {
                 RecipeSaver.saveRecipe(entity, "D:\\data\\douguo\\recipes\\");
                 System.out.println(JSON.toJSONString(entity));
+            }
+            else{
+                System.out.println(fs.getAbsolutePath()+" is not a recipe");
+                fs.delete();
             }
         }
     }

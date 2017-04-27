@@ -59,7 +59,6 @@ public class FileUtils {
 
     public static String getMD5(String input) {
         try {
-            // 如果想要SHA1参数换成”SHA1”）
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
             byte[] inputByteArray = input.getBytes();

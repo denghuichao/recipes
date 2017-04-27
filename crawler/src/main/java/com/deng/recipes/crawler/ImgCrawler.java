@@ -22,9 +22,10 @@ public class ImgCrawler {
     static Logger log = Logger.getLogger(ImgCrawler.class);
     private static final BlockingQueue<Request> urlProvider = new LinkedBlockingDeque<Request>();
     private static Executor imageDownloader;
+    private static int NUM_THREADS = 3;
 
     static {
-        imageDownloader = Executors.newSingleThreadExecutor();
+        imageDownloader = Executors.newFixedThreadPool(NUM_THREADS);
         imageDownloader.execute(new ImageDownloader());
     }
 

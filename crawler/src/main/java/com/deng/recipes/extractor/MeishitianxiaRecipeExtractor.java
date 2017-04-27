@@ -125,6 +125,10 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
             if(entity!=null) {
                 RecipeSaver.saveRecipe(entity, "D:\\data\\meishitianxia\\recipes\\");
             }
+            else{
+                System.out.println(fs.getAbsolutePath()+" is not a recipe");
+                fs.delete();
+            }
         }
     }
 

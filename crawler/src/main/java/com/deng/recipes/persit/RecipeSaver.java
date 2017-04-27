@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
@@ -17,11 +19,11 @@ public class RecipeSaver {
 
     private static BlockingQueue<SaveRequest> recipeProvider = new LinkedBlockingDeque<>();
 
-    private static Thread recipeSaver;
+    private static Executor recipeSaver;
 
     static {
-        recipeSaver = new Thread(new RecipeEntitySaver());
-        recipeSaver.start();
+        recipeSaver = Executors.newCachedThreadPool();
+        recipeSaver.execute(new RecipeEntitySaver());
     }
 
     public static void saveRecipe(RecipeEntity recipeEntity, String dirPath) {
