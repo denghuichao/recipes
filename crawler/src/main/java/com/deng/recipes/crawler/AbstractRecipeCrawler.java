@@ -54,7 +54,6 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String html = htmlParseData.getHtml();
-            RecipeSaver.saveHtml(url, html, htmlDir());
             RecipeEntity recipeEntity = processPageContent(html);
             if (recipeEntity != null) {
                 PersistUtils.save(recipeEntity);
