@@ -4,11 +4,6 @@ package com.deng.recipes.utils;
  * Created by hcdeng on 2017/4/21.
  */
 public class Constants {
-    public static final String IMAGE_DIR = "D:\\data\\iamges\\";
-    public static final String RECIPES_DIR = "D:\\data\\recipes\\";
-    public static final String HTML_DIR = "D:\\data\\htmls\\";
-    public static final String ES_INDEX_NAME = "deng-recipes";
-    public static final String BEGIN_URL = "http://www.meishij.net/chufang/diy/";
 
     public static final String[] proxys = new String[]{
           "212.237.23.220:8080",
@@ -167,6 +162,5 @@ public class Constants {
           "222.85.39.167:808",
           "202.115.12.18:808",
           "118.171.185.83:3128"
-
     };
 }

@@ -5,6 +5,9 @@ import com.deng.recipes.entity.CookStep;
 import com.deng.recipes.entity.Ingredient;
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.persit.ESPersistor;
+import com.deng.recipes.persit.PersistUtils;
+import com.deng.recipes.persit.Persistor;
 import com.deng.recipes.persit.RecipeSaver;
 import com.deng.recipes.utils.FileUtils;
 import com.google.common.base.Preconditions;
@@ -23,7 +26,7 @@ import java.util.List;
 /**
  * Created by hcdeng on 2017/4/26.
  */
-public class DouguoRecipeExtractor implements RecipeExtractor {
+public class DouguoRecipeExtractor extends RecipeExtractor {
 
     @Override
     public RecipeEntity extract(String content) {
@@ -70,7 +73,7 @@ public class DouguoRecipeExtractor implements RecipeExtractor {
         List<CookStep> cookSteps = new ArrayList<>();
         for (int i = 0; i < ses.size(); i++) {
             Element e = ses.get(i);
-            String sImg = e.select("a.cboxElement img").attr("src");
+            String sImg = e.select("a.cboxElement img").attr("original");
             String oStr = e.select("span.fwb").text();
             String sDesc = e.select("p").text().substring(oStr.length());
             System.out.println(sDesc + "->" + sImg);
@@ -109,30 +112,5 @@ public class DouguoRecipeExtractor implements RecipeExtractor {
 
             System.out.println(key + " --> " + value + " ->" + url);
         }
-    }
-
-    public static void processAllRecipes(File fs, RecipeExtractor extractor) throws IOException {
-        if (fs.isDirectory()) {
-            for (File f : fs.listFiles()) {
-                processAllRecipes(f, extractor);
-            }
-        } else {
-            System.out.println(fs.getAbsolutePath());
-            String content = FileUtils.readFile(fs.getAbsolutePath());
-            RecipeEntity entity = extractor.extract(content);
-            if (entity != null) {
-                RecipeSaver.saveRecipe(entity, "D:\\data\\douguo\\recipes\\");
-                System.out.println(JSON.toJSONString(entity));
-            }
-            else{
-                System.out.println(fs.getAbsolutePath()+" is not a recipe");
-                fs.delete();
-            }
-        }
-    }
-
-    //64123b9bcd02f-129e-49c9-8b27-2ae3548de13d.html
-    public static void main(String[] args) throws IOException {
-        processAllRecipes(new File("D:\\data\\douguo\\htmls"), new DouguoRecipeExtractor());
     }
 }

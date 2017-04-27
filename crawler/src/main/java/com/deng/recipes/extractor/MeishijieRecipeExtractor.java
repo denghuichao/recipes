@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by hcdeng on 2017/4/26.
  */
-public class MeishijieRecipeExtractor implements RecipeExtractor{
+public class MeishijieRecipeExtractor extends RecipeExtractor{
     @Override
     public RecipeEntity extract(String content) {
         Recipe recipe = new Recipe();

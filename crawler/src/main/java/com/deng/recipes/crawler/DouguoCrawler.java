@@ -2,6 +2,9 @@ package com.deng.recipes.crawler;
 
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.extractor.DouguoRecipeExtractor;
+import com.deng.recipes.extractor.RecipeExtractor;
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 
@@ -9,16 +12,22 @@ import java.util.ArrayList;
  * Created by hcdeng on 2017/4/25.
  */
 public class DouguoCrawler extends AbstractRecipeCrawler{
-    public DouguoCrawler() {
-        BASE_URL = "douguo.com/";
-        RECIPE_PATTERN = ".*/cookbook/\\d+\\.html$";
-        IMAGE_DIR = "D:\\data\\douguo\\iamges\\";
-        RECIPES_DIR = "D:\\data\\douguo\\recipes\\";
-        HTML_DIR = "D:\\data\\douguo\\htmls\\";
+
+    private final RecipeExtractor extractor = new DouguoRecipeExtractor();
+
+    @Override
+    protected String baseUrl() {
+        return "douguo.com/";
+    }
+
+    @Override
+    protected String recipePattern() {
+        return ".*/cookbook/\\d+\\.html$";
     }
 
     @Override
     protected RecipeEntity processPageContent(String html) {
-        return new RecipeEntity(new Recipe(), new ArrayList<>());
+        Preconditions.checkNotNull(html);
+        return extractor.extract(html);
     }
 }

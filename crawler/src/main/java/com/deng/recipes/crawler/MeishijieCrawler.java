@@ -11,12 +11,14 @@ public final class MeishijieCrawler extends AbstractRecipeCrawler {
 
     private RecipeExtractor recipeExtractor = new MeishijieRecipeExtractor();
 
-    public MeishijieCrawler() {
-        BASE_URL = "meishij.net";
-        RECIPE_PATTERN = ".*/zuofa/\\w\\.html$";
-        IMAGE_DIR = "D:\\data\\meishijie\\iamges\\";
-        RECIPES_DIR = "D:\\data\\meishijie\\recipes\\";
-        HTML_DIR = "D:\\data\\meishijie\\htmls\\";
+    @Override
+    protected String baseUrl() {
+        return "meishij.net";
+    }
+
+    @Override
+    protected String recipePattern() {
+        return ".*/zuofa/\\w\\.html$";
     }
 
     protected  RecipeEntity processPageContent(String content) {

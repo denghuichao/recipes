@@ -13,8 +13,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class FileUtils {
 
-    private FileUtils() {
-    }
+    private FileUtils() {}
 
     public static String url2FileName(String url) {
         Preconditions.checkNotNull(url);

@@ -2,6 +2,9 @@ package com.deng.recipes.crawler;
 
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.extractor.RecipeExtractor;
+import com.deng.recipes.extractor.XiachufangRecipeExtractor;
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 
@@ -10,16 +13,21 @@ import java.util.ArrayList;
  */
 public final class XiachufangCrawler extends AbstractRecipeCrawler{
 
-    public XiachufangCrawler() {
-        BASE_URL = "xiachufang.com";
-        RECIPE_PATTERN = ".*/recipe/\\d+/$";
-        IMAGE_DIR = "D:\\data\\xiachufang\\iamges\\";
-        RECIPES_DIR = "D:\\data\\xiachufang\\recipes\\";
-        HTML_DIR = "D:\\data\\xiachufang\\htmls\\";
+    private final RecipeExtractor extractor = new XiachufangRecipeExtractor();
+
+    @Override
+    protected String baseUrl() {
+        return "xiachufang.com";
+    }
+
+    @Override
+    protected String recipePattern() {
+        return ".*/recipe/\\d+/$";
     }
 
     @Override
     protected RecipeEntity processPageContent(String html) {
-        return new RecipeEntity(new Recipe(), new ArrayList<>());
+        Preconditions.checkNotNull(html);
+        return extractor.extract(html);
     }
 }

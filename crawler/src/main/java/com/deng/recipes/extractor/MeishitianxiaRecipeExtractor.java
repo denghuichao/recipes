@@ -4,6 +4,7 @@ import com.deng.recipes.entity.CookStep;
 import com.deng.recipes.entity.Ingredient;
 import com.deng.recipes.entity.Recipe;
 import com.deng.recipes.entity.RecipeEntity;
+import com.deng.recipes.persit.PersistUtils;
 import com.deng.recipes.persit.RecipeSaver;
 import com.deng.recipes.utils.FileUtils;
 import com.google.common.base.Preconditions;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by hcdeng on 2017/4/26.
  */
-public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
+public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
     @Override
     public RecipeEntity extract(String content) {
         Preconditions.checkNotNull(content);
@@ -111,28 +112,5 @@ public class MeishitianxiaRecipeExtractor implements RecipeExtractor {
             System.out.println(iName + ":" + iQuality + "->" + url);
             recipe.addIngredient(new Ingredient(iName, iQuality, url));
         }
-    }
-
-    public static void processAllRecipes(File fs, RecipeExtractor extractor) throws IOException {
-        if (fs.isDirectory()) {
-            for (File f : fs.listFiles()) {
-                processAllRecipes(f, extractor);
-            }
-        } else {
-            System.out.println(fs.getAbsolutePath());
-            String content = FileUtils.readFile(fs.getAbsolutePath());
-            RecipeEntity entity = extractor.extract(content);
-            if(entity!=null) {
-                RecipeSaver.saveRecipe(entity, "D:\\data\\meishitianxia\\recipes\\");
-            }
-            else{
-                System.out.println(fs.getAbsolutePath()+" is not a recipe");
-                fs.delete();
-            }
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        processAllRecipes(new File("D:\\data\\meishitianxia\\htmls-0425"), new MeishitianxiaRecipeExtractor());
     }
 }

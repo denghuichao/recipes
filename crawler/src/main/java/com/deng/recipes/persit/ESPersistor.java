@@ -1,6 +1,7 @@
 package com.deng.recipes.persit;
 
 import com.alibaba.fastjson.JSON;
+import com.deng.recipes.utils.ConfigManager;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -21,22 +22,18 @@ import java.util.stream.Collectors;
  * Created by hcdeng on 2017/4/24.
  */
 public class ESPersistor extends Persistor {
-    private Client esClient;
+    private static Client esClient;
 
-    private static final ESPersistor INSTANCE = new ESPersistor();
-
-    public ESPersistor getInstance() {
-        return INSTANCE;
-    }
-
-    private ESPersistor() {
+    static {
         init();
     }
 
-    private void init() {
+    private static void init() {
         try {
             esClient = new PreBuiltTransportClient(Settings.EMPTY)
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+                    .addTransportAddress(new InetSocketTransportAddress(
+                            InetAddress.getByName(ConfigManager.instance().getProperty("es.host", "127.0.0.1")),
+                            Integer.parseInt(ConfigManager.instance().getProperty("es.port", "9300"))));
         } catch (Exception e) {
             System.out.println("error when init es");
         }

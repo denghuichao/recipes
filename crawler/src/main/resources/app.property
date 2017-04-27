@@ -1,0 +1,6 @@
+es.host = 127.0.0.1
+es.port = 9300
+
+persistor = com.deng.recipes.persit.ESPersistor
+db.path = recipes
+cache.path = /data/

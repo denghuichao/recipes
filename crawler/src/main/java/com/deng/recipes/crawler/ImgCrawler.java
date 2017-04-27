@@ -7,7 +7,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+//import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +19,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class ImgCrawler {
 
-    static Logger log = Logger.getLogger(ImgCrawler.class);
     private static final BlockingQueue<Request> urlProvider = new LinkedBlockingDeque<Request>();
     private static Executor imageDownloader;
     private static int NUM_THREADS = 3;
@@ -43,7 +42,7 @@ public class ImgCrawler {
         try {
             urlProvider.put(new Request(imgUrl, imgDir));
         }catch (InterruptedException e){
-            log.info("fail to commit img url to blocking queue: "+e.getMessage());
+            System.out.println("fail to commit img url to blocking queue: "+e.getMessage());
         }
     }
 
@@ -55,7 +54,7 @@ public class ImgCrawler {
                     System.out.println("downloading "+request.url);
                     downloadImageAndSave(request);
                 } catch (InterruptedException e) {
-                    log.info("fail to take url from blocking queue: "+e.getMessage());
+                    System.out.println("fail to take url from blocking queue: "+e.getMessage());
                 }
             }
         }
@@ -79,7 +78,7 @@ public class ImgCrawler {
                         output.close();
                     }
                 }catch (Exception e) {
-                    log.info("fail to download image: "+url);
+                    System.out.println("fail to download image: "+url);
                 }finally{
                     httpClient.getConnectionManager().shutdown();
                 }

@@ -13,12 +13,14 @@ public class MeishitianxiaCrawler extends AbstractRecipeCrawler{
 
     private RecipeExtractor recipeExtractor = new MeishitianxiaRecipeExtractor();
 
-    public MeishitianxiaCrawler() {
-        BASE_URL = "meishichina.com";
-        RECIPE_PATTERN = ".*/recipe-\\d+\\.html$";
-        IMAGE_DIR = "D:\\data\\meishitianxia\\iamges\\";
-        RECIPES_DIR = "D:\\data\\meishitianxia\\recipes\\";
-        HTML_DIR = "D:\\data\\meishitianxia\\htmls\\";
+    @Override
+    protected String baseUrl() {
+        return "meishichina.com";
+    }
+
+    @Override
+    protected String recipePattern() {
+        return ".*/recipe-\\d+\\.html$";
     }
 
     @Override
