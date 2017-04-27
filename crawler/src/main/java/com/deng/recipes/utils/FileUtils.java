@@ -13,7 +13,42 @@ import java.security.NoSuchAlgorithmException;
  */
 public class FileUtils {
 
-    private FileUtils() {}
+    private FileUtils() {
+    }
+
+    public static boolean saveFile(String content, String path, String fileName) {
+        if(makeDir(path))
+            return saveFile(content, path+"/"+fileName);
+        else return false;
+    }
+
+    public static boolean makeDir(String path){
+        File dir = null;
+        boolean res = true;
+        try {
+            dir = new File(path);
+            if (!dir.exists()) dir.mkdirs();
+            else if (!dir.isDirectory()) res = false;
+        } catch (Exception e) {
+            res = false;
+        } finally {
+            dir = null;
+        }
+
+        return res;
+    }
+
+    public static boolean saveFile(String content, String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(content);
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("fail to save file " + e.getMessage());
+            return false;
+        }
+    }
 
     public static String url2FileName(String url) {
         Preconditions.checkNotNull(url);

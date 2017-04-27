@@ -28,18 +28,16 @@ public class RecipeSaver {
 
     public static void saveRecipe(RecipeEntity recipeEntity, String dirPath) {
         String content = JSON.toJSONString(recipeEntity);
-        String path = dirPath + FileUtils.getMD5(content);
         try {
-            recipeProvider.put(new SaveRequest(path, content));
+            recipeProvider.put(new SaveRequest(dirPath, FileUtils.getMD5(content), content));
         } catch (InterruptedException e) {
             System.out.println("fail to submit RecipeEntity");
         }
     }
 
     public static void saveHtml(String url, String html, String dirPath) {
-        String path = dirPath + FileUtils.getMD5(html) + ".html";
         try {
-            recipeProvider.put(new SaveRequest(path, html));
+            recipeProvider.put(new SaveRequest(dirPath, FileUtils.getMD5(html) + ".html", html));
         } catch (InterruptedException e) {
             System.out.println("fail to submit html");
         }
@@ -48,10 +46,12 @@ public class RecipeSaver {
     private static class SaveRequest {
         private final String filePath;
         private final String content;
+        private final String fileName;
 
-        public SaveRequest(String filePath, String content) {
+        public SaveRequest(String filePath, String fileName, String content) {
             this.filePath = filePath;
             this.content = content;
+            this.fileName = fileName;
         }
     }
 
@@ -62,22 +62,10 @@ public class RecipeSaver {
                 SaveRequest request = null;
                 try {
                     request = recipeProvider.take();
-                    saveFile(request);
+                    FileUtils.saveFile(request.filePath, request.fileName, request.content);
                 } catch (InterruptedException e) {
                     System.out.println("error when saving: " + e.getMessage());
                 }
-            }
-        }
-
-        private void saveFile(SaveRequest request) {
-            FileWriter writer = null;
-            try {
-                System.out.println("saving " + request.filePath);
-                writer = new FileWriter(request.filePath);
-                writer.write(request.content);
-                writer.close();
-            } catch (IOException e) {
-                System.out.println("fail to save RecipeEntity " + e.getMessage());
             }
         }
     }

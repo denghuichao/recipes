@@ -15,7 +15,6 @@ public abstract class Persistor {
     public abstract List<Boolean> saveAll(List<?> collection, String dbName, String typeName);
 
     public boolean save(Object o, String dbName) {
-        System.out.println(o.getClass().getTypeName());
         return save(o, dbName, o.getClass().getTypeName());
     }
 

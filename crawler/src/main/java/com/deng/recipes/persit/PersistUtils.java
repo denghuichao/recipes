@@ -17,7 +17,8 @@ public class PersistUtils {
 
     private static final PersistUtils INSTANCE = new PersistUtils();
 
-    private static final Executor executor = Executors.newCachedThreadPool();
+    private static final Executor executor = Executors.newFixedThreadPool(
+            Integer.parseInt(ConfigManager.instance().getProperty("persistor.threads", "4")));
 
     private PersistUtils() {
         String pname = ConfigManager.instance().getProperty("persistor");
