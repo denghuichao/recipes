@@ -48,7 +48,6 @@ public class CrawlerBooter {
         /**
          * TODO 实现基于XML配置的爬虫启动
          */
-        //InputStream inputStream = CrawlerBooter.class.getResourceAsStream(CLASSPATH_CONFIG_PATH);
         return null;
     }
 }
