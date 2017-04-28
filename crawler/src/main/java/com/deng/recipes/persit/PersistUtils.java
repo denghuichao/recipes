@@ -28,7 +28,7 @@ public class PersistUtils {
             Class c = Class.forName(pname);
             persistor = (Persistor) c.newInstance();
         } catch (Exception e) {
-            persistor = new FilePersistor();
+            throw new RuntimeException(e);
         }
     }
 

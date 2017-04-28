@@ -62,7 +62,7 @@ public class RecipeSaver {
                 SaveRequest request = null;
                 try {
                     request = recipeProvider.take();
-                    FileUtils.saveFile(request.filePath, request.fileName, request.content);
+                    FileUtils.saveFile(request.content, request.filePath, request.fileName);
                 } catch (InterruptedException e) {
                     System.out.println("error when saving: " + e.getMessage());
                 }

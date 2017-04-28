@@ -7,6 +7,8 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>crawler</module>
+      <module>search</module>
+    <module>common</module>
   </modules>
   <packaging>pom</packaging>
 
