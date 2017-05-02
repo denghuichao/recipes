@@ -6,16 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
-        <module name="crawler" />
-        <module name="search" />
+        <module name="recipe-api" />
+        <module name="recipe-crawler" />
+        <module name="recipe-search" />
+        <module name="recipe-ws" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="common" target="1.8" />
-      <module name="crawler" target="1.8" />
+      <module name="recipe-api" target="1.8" />
+      <module name="recipe-crawler" target="1.8" />
+      <module name="recipe-search" target="1.8" />
+      <module name="recipe-ws" target="1.8" />
       <module name="recipes" target="1.8" />
-      <module name="search" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

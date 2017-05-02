@@ -1,148 +1,221 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.deng.recipes</groupId>
-  <artifactId>recipes</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <modules>
-    <module>crawler</module>
-      <module>search</module>
-    <module>common</module>
-  </modules>
-  <packaging>pom</packaging>
+    <groupId>com.deng.recipes</groupId>
+    <artifactId>recipes</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>recipe-crawler</module>
+        <module>recipe-search</module>
+        <module>recipe-api</module>
+        <module>recipe-ws</module>
+    </modules>
+    <packaging>pom</packaging>
 
-  <url>http://maven.apache.org</url>
+    <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <juint.version>4.11</juint.version>
+        <spring.version>4.3.0.RELEASE</spring.version>
+        <jackson-core.version>2.7.5</jackson-core.version>
+        <javax.servlet.version>3.0.1</javax.servlet.version>
+        <guava.version>17.0</guava.version>
+        <commons-exe.version>1.1</commons-exe.version>
+        <log4j.version>2.7</log4j.version>
+        <crawler4j.version>4.1</crawler4j.version>
+        <httpclient.version>4.5</httpclient.version>
+        <jsoup.version>1.7.2</jsoup.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-io.version>2.4</commons-io.version>
+        <elasticsearch.version>5.3.0</elasticsearch.version>
+        <fastjson.version>1.2.31</fastjson.version>
+        <cpdetector.version>1.0.7</cpdetector.version>
+        <jchardet.version>1.0</jchardet.version>
+        <commons-codec.version>1.9</commons-codec.version>
+        <antlr.version>2.7.7</antlr.version>
+    </properties>
 
-  <dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>17.0</version>
-    </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-exec</artifactId>
-      <version>1.1</version>
-    </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-exec</artifactId>
+                <version>${commons-exe.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.7</version>
-    </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.7</version>
-    </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-to-slf4j</artifactId>
-      <version>2.7</version>
-    </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>edu.uci.ics</groupId>
-      <artifactId>crawler4j</artifactId>
-      <version>4.1</version>
-    </dependency>
+            <dependency>
+                <groupId>edu.uci.ics</groupId>
+                <artifactId>crawler4j</artifactId>
+                <version>${crawler4j.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.5</version>
-    </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
 
-    <dependency>
-      <!-- jsoup HTML parser library @ http://jsoup.org/ -->
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>1.7.2</version>
-    </dependency>
+            <dependency>
+                <!-- jsoup HTML parser library @ http://jsoup.org/ -->
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
-      <type>jar</type>
-      <scope>compile</scope>
-    </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
 
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.4</version>
-      <type>jar</type>
-      <scope>compile</scope>
-    </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
-    <dependency>
-      <groupId>org.elasticsearch</groupId>
-      <artifactId>elasticsearch</artifactId>
-      <version>5.3.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.elasticsearch.client</groupId>
-      <artifactId>transport</artifactId>
-      <version>5.3.0</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.31</version>
-    </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
 
 
-    <dependency>
-      <groupId>cpdetector</groupId>
-      <artifactId>cpdetector</artifactId>
-      <version>1.0.7</version>
-    </dependency>
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
 
-    <!-- https://mvnrepository.com/artifact/net.sourceforge.jchardet/jchardet -->
-    <dependency>
-      <groupId>net.sourceforge.jchardet</groupId>
-      <artifactId>jchardet</artifactId>
-      <version>1.0</version>
-    </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
 
-    <dependency>
-      <groupId>antlr</groupId>
-      <artifactId>antlr</artifactId>
-      <version>2.7.7</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.9</version>
-    </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
 
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <type>jar</type>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
-  </dependencyManagement>
+            <dependency>
+                <groupId>cpdetector</groupId>
+                <artifactId>cpdetector</artifactId>
+                <version>${cpdetector.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/net.sourceforge.jchardet/jchardet -->
+            <dependency>
+                <groupId>net.sourceforge.jchardet</groupId>
+                <artifactId>jchardet</artifactId>
+                <version>${jchardet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>antlr</groupId>
+                <artifactId>antlr</artifactId>
+                <version>${antlr.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.deng.recipes</groupId>
+                <artifactId>recipe-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.deng.recipes</groupId>
+                <artifactId>recipe-search</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.deng.recipes</groupId>
+                <artifactId>recipe-crawler</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.deng.recipes</groupId>
+                <artifactId>recipe-ws</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${juint.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

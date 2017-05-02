@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="recipe-ws:war">
+    <output-path>$PROJECT_DIR$/recipe-ws/target</output-path>
+    <root id="archive" name="recipe-ws.war">
+      <element id="artifact" artifact-name="recipe-ws:war exploded" />
+    </root>
+  </artifact>
+</component>

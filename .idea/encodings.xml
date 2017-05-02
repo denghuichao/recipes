@@ -2,8 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/crawler" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/recipe-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/recipe-crawler" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/recipe-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/recipe-ws" charset="UTF-8" />
   </component>
 </project>

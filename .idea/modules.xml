@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/crawler/crawler.iml" filepath="$PROJECT_DIR$/crawler/crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recipe-api/recipe-api.iml" filepath="$PROJECT_DIR$/recipe-api/recipe-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recipe-crawler/recipe-crawler.iml" filepath="$PROJECT_DIR$/recipe-crawler/recipe-crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recipe-search/recipe-search.iml" filepath="$PROJECT_DIR$/recipe-search/recipe-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recipe-ws/recipe-ws.iml" filepath="$PROJECT_DIR$/recipe-ws/recipe-ws.iml" />
       <module fileurl="file://$PROJECT_DIR$/recipes.iml" filepath="$PROJECT_DIR$/recipes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/search/search.iml" filepath="$PROJECT_DIR$/search/search.iml" />
     </modules>
   </component>
 </project>
