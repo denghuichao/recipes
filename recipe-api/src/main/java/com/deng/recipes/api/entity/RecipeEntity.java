@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class RecipeEntity {
 
-    private final String ID;
+    private  String ID;
 
     private int likedNum;
 
@@ -21,6 +21,9 @@ public class RecipeEntity {
     private  Recipe recipe;
 
     private  List<CookStep> cookSteps;
+
+    public RecipeEntity() {
+    }
 
     public RecipeEntity(String ID, Recipe recipe, List<CookStep> cookSteps) {
         this.ID = ID;
@@ -74,5 +77,13 @@ public class RecipeEntity {
 
     public void setCookSteps(List<CookStep> cookSteps) {
         this.cookSteps = cookSteps;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

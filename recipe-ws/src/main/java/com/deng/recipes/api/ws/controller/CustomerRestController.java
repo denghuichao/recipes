@@ -1,28 +1,29 @@
 package com.deng.recipes.api.ws.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import com.deng.recipes.api.entity.Recipe;
 import com.deng.recipes.api.entity.RecipeEntity;
+import com.deng.recipes.api.ws.dao.RecipesDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class CustomerRestController {
 
+	@Autowired
+	RecipesDAO recipesDAO;
+
 	@GetMapping("/recipes/recommendation")
 	public List<RecipeEntity> getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {
 		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size);
-		return Arrays.asList(new RecipeEntity(new Recipe(), new ArrayList<>()));
+		return recipesDAO.getRecipes(page_index, page_size);
 	}
 
 	@GetMapping("/recipes")
 	public List<RecipeEntity> getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size, @RequestParam Map<String, Object> params) {
 		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size+" params= "+params);
-		return Arrays.asList(new RecipeEntity(new Recipe(), new ArrayList<>()));
+		return recipesDAO.getRecipes(page_index, page_size);
 	}
 
 	@GetMapping("recipes/collections/{id}")

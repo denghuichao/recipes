@@ -83,23 +83,23 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
         }
     }
 
-    @Override
-    protected void handlePageStatusCode(WebURL webUrl, int statusCode, String statusDescription) {
-
-        if(statusCode/100 != 4)return;
-
-        //处理4xx错误
-        if(proxyPool != null){
-            PageFetcher fetcher = this.getMyController().getPageFetcher();
-            fetcher.shutDown();
-
-            Proxy proxy = proxyPool.getProxy();
-            System.out.println("using proxy:"+proxy);
-            CrawlConfig config = fetcher.getConfig();
-            config.setProxyHost(proxy.getHost());
-            config.setProxyPort(proxy.getPort());
-            PageFetcher newFetcher = new PageFetcher(config);
-            this.getMyController().setPageFetcher(newFetcher);
-        }
-    }
+//    @Override
+//    protected void handlePageStatusCode(WebURL webUrl, int statusCode, String statusDescription) {
+//
+//        if(statusCode/100 != 4)return;
+//
+//        //处理4xx错误
+//        if(proxyPool != null){
+//            PageFetcher fetcher = this.getMyController().getPageFetcher();
+//            fetcher.shutDown();
+//
+//            Proxy proxy = proxyPool.getProxy();
+//            System.out.println("using proxy:"+proxy);
+//            CrawlConfig config = fetcher.getConfig();
+//            config.setProxyHost(proxy.getHost());
+//            config.setProxyPort(proxy.getPort());
+//            PageFetcher newFetcher = new PageFetcher(config);
+//            this.getMyController().setPageFetcher(newFetcher);
+//        }
+//    }
 }
