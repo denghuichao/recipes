@@ -12,12 +12,6 @@ public class RecipeEntity {
 
     private  String ID;
 
-    private int likedNum;
-
-    private int cookedNum;
-
-    private int collectedNum;
-
     private  Recipe recipe;
 
     private  List<CookStep> cookSteps;
@@ -37,30 +31,6 @@ public class RecipeEntity {
 
         this.recipe = recipe;
         this.cookSteps = cookSteps;
-    }
-
-    public int getLikedNum() {
-        return likedNum;
-    }
-
-    public void setLikedNum(int likedNum) {
-        this.likedNum = likedNum;
-    }
-
-    public int getCookedNum() {
-        return cookedNum;
-    }
-
-    public void setCookedNum(int cookedNum) {
-        this.cookedNum = cookedNum;
-    }
-
-    public int getCollectedNum() {
-        return collectedNum;
-    }
-
-    public void setCollectedNum(int collectedNum) {
-        this.collectedNum = collectedNum;
     }
 
     public Recipe getRecipe() {
