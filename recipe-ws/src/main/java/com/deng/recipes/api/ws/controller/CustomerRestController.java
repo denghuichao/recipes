@@ -3,6 +3,7 @@ package com.deng.recipes.api.ws.controller;
 import java.util.List;
 import java.util.Map;
 import com.deng.recipes.api.entity.RecipeEntity;
+import com.deng.recipes.api.entity.subscriber.RecipeSubscriberResultInfo;
 import com.deng.recipes.api.ws.dao.RecipesDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,59 +16,59 @@ public class CustomerRestController {
 	RecipesDAO recipesDAO;
 
 	@GetMapping("/recipes/recommendation")
-	public List<RecipeEntity> getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {
+	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {
 		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size);
-		return recipesDAO.getRecipes(page_index, page_size);
+		return null;
 	}
 
 	@GetMapping("/recipes")
-	public List<RecipeEntity> getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size, @RequestParam Map<String, Object> params) {
+	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size, @RequestParam Map<String, Object> params) {
 		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size+" params= "+params);
-		return recipesDAO.getRecipes(page_index, page_size);
+		return null;
 	}
 
 	@GetMapping("/recipes/search")
-	public List<RecipeEntity> searchRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size,String queryString){
-		return recipesDAO.getRecipes(page_index, page_size);
+	public RecipeSubscriberResultInfo searchRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size,String queryString){
+		return null;
 	}
 
 	@GetMapping("recipes/collections")
-	public int getCollectionCount(@RequestParam String id){
-		return 1000;
+	public RecipeSubscriberResultInfo getCollectionCount(@RequestParam String id){
+		return null;
 	}
 
 	@PutMapping("/recipes/collections/addition")
-	public int increaseCollection(@RequestParam String id){
-		return 1000;
+	public RecipeSubscriberResultInfo increaseCollection(@RequestParam String id){
+		return null;
 	}
 
 	@PutMapping("/recipes/collections/reduction")
-	public int decreaseCollections(@RequestParam String id){
-		return 999;
+	public RecipeSubscriberResultInfo decreaseCollections(@RequestParam String id){
+		return null;
 	}
 
 	@GetMapping("recipes/likeness")
-	public int getLikeCount(@RequestParam String id){
-		return 999;
+	public RecipeSubscriberResultInfo getLikeCount(@RequestParam String id){
+		return null;
 	}
 
 	@PutMapping("/recipes/likeness/addition")
-	public int increaseLikeness(@RequestParam String id){
-		return 1000;
+	public RecipeSubscriberResultInfo increaseLikeness(@RequestParam String id){
+		return null;
 	}
 
 	@PutMapping("/recipes/likeness/reduction")
-	public int decreaseLikeness(@RequestParam String id){
-		return 999;
+	public RecipeSubscriberResultInfo decreaseLikeness(@RequestParam String id){
+		return null;
 	}
 
 	@GetMapping("recipes/cookness")
-	public int getCooknessCount(@RequestParam String id){
-		return 1000;
+	public RecipeSubscriberResultInfo getCooknessCount(@RequestParam String id){
+		return null;
 	}
 
 	@PutMapping("/recipes/cookness/addition")
-	public int increaseCookness(@RequestParam String id){
-		return 999;
+	public RecipeSubscriberResultInfo increaseCookness(@RequestParam String id){
+		return null;
 	}
 }
