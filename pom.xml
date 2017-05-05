@@ -4,7 +4,7 @@
 
     <groupId>com.deng.recipes</groupId>
     <artifactId>recipes</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>recipe-crawler</module>
         <module>recipe-search</module>
@@ -188,25 +188,25 @@
             <dependency>
                 <groupId>com.deng.recipes</groupId>
                 <artifactId>recipe-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.deng.recipes</groupId>
                 <artifactId>recipe-search</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.deng.recipes</groupId>
                 <artifactId>recipe-crawler</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.deng.recipes</groupId>
                 <artifactId>recipe-ws</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
 
             <dependency>

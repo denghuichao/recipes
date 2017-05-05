@@ -1,9 +1,11 @@
 package com.deng.recipes.api.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by hcdeng on 2017/4/21.
  */
-public class CookStep {
+public class CookStep implements Serializable{
 
     private Integer stepOrder;
 

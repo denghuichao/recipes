@@ -1,5 +1,6 @@
 package com.deng.recipes.api.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Set;
 /**
  * Created by hcdeng on 2017/4/21.
  */
-public class Recipe {
+public class Recipe implements Serializable{
 
     private String title = "";
 
@@ -39,6 +40,16 @@ public class Recipe {
     private int cookedNum;
 
     private int collectedNum;
+
+    private float score;
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
 
     public String getTitle() {
         return title;

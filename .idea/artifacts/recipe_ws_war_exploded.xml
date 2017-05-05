@@ -18,7 +18,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.5" />
-          <element id="archive" name="recipe-api-1.0-SNAPSHOT.jar">
+          <element id="archive" name="recipe-api-1.0.0.jar">
             <element id="module-output" name="recipe-api" />
           </element>
           <element id="library" level="project" name="Maven: com.google.guava:guava:17.0" />

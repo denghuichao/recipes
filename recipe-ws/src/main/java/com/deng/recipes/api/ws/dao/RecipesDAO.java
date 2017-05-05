@@ -17,7 +17,8 @@ public class RecipesDAO {
 		Preconditions.checkArgument(pageIndex >= 0 );
 		Preconditions.checkArgument(pageSize > 0);
 
-		return readFromFile();
+		List<RecipeEntity> list = readFromFile();
+		return list.subList((pageIndex * pageIndex) % list.size(), (pageIndex *pageSize + pageIndex) % list.size());
 	}
 
 	private List<RecipeEntity> readFromFile(){

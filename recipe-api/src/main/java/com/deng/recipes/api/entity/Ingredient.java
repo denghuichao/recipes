@@ -1,9 +1,11 @@
 package com.deng.recipes.api.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by hcdeng on 2017/4/24.
  */
-public class Ingredient {
+public class Ingredient implements Serializable {
     private  String ingredientName;//配料名称
     private  String quantityDesc;  //用量描述
     private String url;

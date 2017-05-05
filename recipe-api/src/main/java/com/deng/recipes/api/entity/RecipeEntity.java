@@ -3,12 +3,13 @@ package com.deng.recipes.api.entity;
 import com.alibaba.fastjson.JSON;
 import com.deng.recipes.api.utils.FileUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by hcdeng on 2017/4/21.
  */
-public class RecipeEntity {
+public class RecipeEntity implements Serializable{
 
     private  String ID;
 
