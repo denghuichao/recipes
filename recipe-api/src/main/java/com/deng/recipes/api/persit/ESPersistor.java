@@ -1,6 +1,7 @@
 package com.deng.recipes.api.persit;
 
 import com.alibaba.fastjson.JSON;
+import com.deng.recipes.api.persit.utils.ESUtils;
 import com.deng.recipes.api.utils.ConfigManager;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -47,7 +48,7 @@ public class ESPersistor extends Persistor {
         Preconditions.checkNotNull(indexName);
         Preconditions.checkNotNull(typeName);
 
-        IndexResponse response = esClient.prepareIndex(indexName, typeName)
+        IndexResponse response = esClient.prepareIndex(indexName, typeName, ESUtils.getId(object))
                 .setSource(JSON.toJSONString(object), XContentType.JSON).get();
 
         return response;
@@ -71,7 +72,7 @@ public class ESPersistor extends Persistor {
 
         BulkRequestBuilder bulkRequest = esClient.prepareBulk();
         for (Object o : objects) {
-            bulkRequest.add(esClient.prepareIndex(indexName, typeName)
+            bulkRequest.add(esClient.prepareIndex(indexName, typeName, ESUtils.getId(o))
                     .setSource(JSON.toJSONString(o), XContentType.JSON)
             );
         }

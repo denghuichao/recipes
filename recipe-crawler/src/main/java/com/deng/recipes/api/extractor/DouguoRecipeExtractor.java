@@ -50,7 +50,7 @@ public class DouguoRecipeExtractor extends RecipeExtractor {
 
         String view = doc.select("span.collectview").text();
         String collection = doc.select("span.collectnum").text();
-        recipe.setHot((Integer.parseInt(view) * 3 + Integer.parseInt(collection) * 7) / 10);
+        recipe.setCollectedNum((Integer.parseInt(view) * 3 + Integer.parseInt(collection) * 7) / 10);
 
         String tips = doc.select("div.xtieshi p").text();
         System.out.println(tips);

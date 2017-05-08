@@ -47,7 +47,7 @@ public class XiachufangRecipeExtractor extends RecipeExtractor {
         String cookedNunm = doc.select("div.cooked.float-left span.number").text();
         System.out.println(cookedNunm);
         if (!Strings.isNullOrEmpty(cookedNunm))
-            recipe.setHot(Integer.parseInt(cookedNunm));
+            recipe.setCookedNum(Integer.parseInt(cookedNunm));
 
         String desc = doc.select("div.desc.mt30").text();
         System.out.println(desc);

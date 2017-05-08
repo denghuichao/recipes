@@ -23,20 +23,6 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
 
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
 
-    private ProxyPool proxyPool = null;
-
-    public AbstractRecipeCrawler() {
-        String pClassName = ConfigManager.instance().getProperty("proxy.class");
-        if(!Strings.isNullOrEmpty(pClassName)){
-            try {
-                Class pClass = Class.forName(pClassName);
-                proxyPool = (ProxyPool) pClass.newInstance();
-            }catch (Exception e){
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     protected abstract String baseUrl();
 
     protected abstract String recipePattern();
@@ -83,23 +69,4 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
         }
     }
 
-//    @Override
-//    protected void handlePageStatusCode(WebURL webUrl, int statusCode, String statusDescription) {
-//
-//        if(statusCode/100 != 4)return;
-//
-//        //处理4xx错误
-//        if(proxyPool != null){
-//            PageFetcher fetcher = this.getMyController().getPageFetcher();
-//            fetcher.shutDown();
-//
-//            Proxy proxy = proxyPool.getProxy();
-//            System.out.println("using proxy:"+proxy);
-//            CrawlConfig config = fetcher.getConfig();
-//            config.setProxyHost(proxy.getHost());
-//            config.setProxyPort(proxy.getPort());
-//            PageFetcher newFetcher = new PageFetcher(config);
-//            this.getMyController().setPageFetcher(newFetcher);
-//        }
-//    }
 }

@@ -27,11 +27,7 @@ public class RecipeEntity implements Serializable{
     }
 
     public RecipeEntity(Recipe recipe, List<CookStep> cookSteps) {
-        this.ID = FileUtils.getMD5(JSON.toJSONString(recipe)
-                + JSON.toJSONString(cookSteps));
-
-        this.recipe = recipe;
-        this.cookSteps = cookSteps;
+        this(FileUtils.getMD5(JSON.toJSONString(recipe)), recipe, cookSteps);
     }
 
     public Recipe getRecipe() {
