@@ -1,6 +1,5 @@
 package com.deng.recipes.api.ws.controller;
 
-import java.util.Map;
 import com.deng.recipes.api.entity.subscriber.RecipeSubscriberResultInfo;
 import com.deng.recipes.api.ws.dao.RecipesDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +13,12 @@ public class SearchRestController {
 
 	@GetMapping("/recipes/recommendation")
 	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {
-		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size);
-		return null;
-	}
-
-	@GetMapping("/recipes")
-	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size, @RequestParam Map<String, Object> params) {
-		System.out.println("pageIndex: "+page_index+" pageSize= "+page_size+" params= "+params);
-		return null;
+		return recipesDAO.queryHotRecipes(page_index, page_size);
 	}
 
 	@GetMapping("/recipes/search")
 	public RecipeSubscriberResultInfo searchRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size,String queryString){
-		return null;
+		return recipesDAO.queryRecipes(queryString, page_index, page_size);
 	}
 
 	@GetMapping("recipes/collections")

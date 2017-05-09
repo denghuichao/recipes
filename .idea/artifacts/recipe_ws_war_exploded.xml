@@ -21,6 +21,11 @@
           <element id="archive" name="recipe-api-1.0.0.jar">
             <element id="module-output" name="recipe-api" />
           </element>
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.31" />
+          <element id="library" level="project" name="Maven: cpdetector:cpdetector:1.0.7" />
+          <element id="library" level="project" name="Maven: net.sourceforge.jchardet:jchardet:1.0" />
+          <element id="library" level="project" name="Maven: antlr:antlr:2.7.7" />
+          <element id="library" level="project" name="Maven: junit:junit:4.11" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:17.0" />
           <element id="library" level="project" name="Maven: org.elasticsearch:elasticsearch:5.3.0" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:6.4.1" />
@@ -70,11 +75,10 @@
           <element id="library" level="project" name="Maven: org.elasticsearch.plugin:lang-mustache-client:5.3.0" />
           <element id="library" level="project" name="Maven: com.github.spullara.mustache.java:compiler:0.9.3" />
           <element id="library" level="project" name="Maven: org.elasticsearch.plugin:percolator-client:5.3.0" />
-          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.31" />
-          <element id="library" level="project" name="Maven: cpdetector:cpdetector:1.0.7" />
-          <element id="library" level="project" name="Maven: net.sourceforge.jchardet:jchardet:1.0" />
-          <element id="library" level="project" name="Maven: antlr:antlr:2.7.7" />
-          <element id="library" level="project" name="Maven: junit:junit:4.11" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.7" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.7" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.7" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
         </element>
       </element>
       <element id="directory" name="META-INF">
