@@ -6,7 +6,7 @@ package com.deng.recipes.api.entity.subscriber;
 
 public class NumberSubscriberResultInfo {
     private String msg;
-    private String retCode;
+    private Integer retCode;
     private Integer result;
 
     public String getMsg() {
@@ -17,11 +17,11 @@ public class NumberSubscriberResultInfo {
         this.msg = msg;
     }
 
-    public String getRetCode() {
+    public Integer getRetCode() {
         return retCode;
     }
 
-    public void setRetCode(String retCode) {
+    public void setRetCode(Integer retCode) {
         this.retCode = retCode;
     }
 
@@ -31,5 +31,15 @@ public class NumberSubscriberResultInfo {
 
     public void setResult(Integer result) {
         this.result = result;
+    }
+
+    public static NumberSubscriberResultInfo fail(){
+
+        NumberSubscriberResultInfo resultInfo = new NumberSubscriberResultInfo();
+        resultInfo.setResult(0);
+        resultInfo.setMsg("fail");
+        resultInfo.setRetCode(0);
+
+        return resultInfo;
     }
 }

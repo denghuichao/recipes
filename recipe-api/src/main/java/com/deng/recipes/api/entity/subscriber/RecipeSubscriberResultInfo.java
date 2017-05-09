@@ -9,7 +9,7 @@ import com.deng.recipes.api.entity.SearchRecipeResultInfo;
 public class RecipeSubscriberResultInfo {
 
     private String msg;
-    private int retCode;
+    private Integer retCode;
     private SearchRecipeResultInfo result;
 
     public RecipeSubscriberResultInfo(){
@@ -24,11 +24,11 @@ public class RecipeSubscriberResultInfo {
         this.msg = msg;
     }
 
-    public int getRetCode() {
+    public Integer getRetCode() {
         return retCode;
     }
 
-    public void setRetCode(int retCode) {
+    public void setRetCode(Integer retCode) {
         this.retCode = retCode;
     }
 

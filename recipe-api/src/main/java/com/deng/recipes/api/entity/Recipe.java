@@ -153,14 +153,6 @@ public class Recipe implements Serializable{
         this.tips = tips;
     }
 
-//    public void setScore(Float score) {
-//        //this.score = score;
-//    }
-//
-//    public void setHot(Integer hot) {
-//        //this.hot = hot;
-//    }
-
     public int getLikedNum() {
         return likedNum;
     }

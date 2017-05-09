@@ -1,5 +1,6 @@
 package com.deng.recipes.api.ws.controller;
 
+import com.deng.recipes.api.entity.subscriber.NumberSubscriberResultInfo;
 import com.deng.recipes.api.entity.subscriber.RecipeSubscriberResultInfo;
 import com.deng.recipes.api.ws.dao.RecipesDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,43 +22,33 @@ public class SearchRestController {
 		return recipesDAO.queryRecipes(queryString, page_index, page_size);
 	}
 
-	@GetMapping("recipes/collections")
-	public RecipeSubscriberResultInfo getCollectionCount(@RequestParam String id){
-		return null;
-	}
-
 	@PutMapping("/recipes/collections/addition")
-	public RecipeSubscriberResultInfo increaseCollection(@RequestParam String id){
-		return null;
+	public NumberSubscriberResultInfo increaseCollection(@RequestParam String id){
+		return recipesDAO.incrCollectionNum(id);
 	}
 
 	@PutMapping("/recipes/collections/reduction")
-	public RecipeSubscriberResultInfo decreaseCollections(@RequestParam String id){
-		return null;
-	}
-
-	@GetMapping("recipes/likeness")
-	public RecipeSubscriberResultInfo getLikeCount(@RequestParam String id){
-		return null;
+	public NumberSubscriberResultInfo decreaseCollections(@RequestParam String id){
+		return recipesDAO.decrCollectionNum(id);
 	}
 
 	@PutMapping("/recipes/likeness/addition")
-	public RecipeSubscriberResultInfo increaseLikeness(@RequestParam String id){
-		return null;
+	public NumberSubscriberResultInfo increaseLikeness(@RequestParam String id){
+		return recipesDAO.incrLikeNum(id);
 	}
 
 	@PutMapping("/recipes/likeness/reduction")
-	public RecipeSubscriberResultInfo decreaseLikeness(@RequestParam String id){
-		return null;
-	}
-
-	@GetMapping("recipes/cookness")
-	public RecipeSubscriberResultInfo getCooknessCount(@RequestParam String id){
-		return null;
+	public NumberSubscriberResultInfo decreaseLikeness(@RequestParam String id){
+		return recipesDAO.decrLikeNum(id);
 	}
 
 	@PutMapping("/recipes/cookness/addition")
-	public RecipeSubscriberResultInfo increaseCookness(@RequestParam String id){
-		return null;
+	public NumberSubscriberResultInfo increaseCookness(@RequestParam String id){
+		return recipesDAO.incrCookNum(id);
 	}
+
+    @PutMapping("/recipes/cookness/reduction")
+    public NumberSubscriberResultInfo decreaseCookness(@RequestParam String id){
+        return recipesDAO.decrCookNum(id);
+    }
 }
