@@ -11,18 +11,18 @@ import java.util.concurrent.Executors;
  */
 public class PersistUtils {
 
-    private static String dbPath;//db name or dir name
+    private static String dbPath = "recipes";//db name or dir name
 
-    private static Persistor persistor;
+    private static Persistor persistor = new ESPersistor();
 
     private static final PersistUtils INSTANCE = new PersistUtils();
 
     private static final Executor executor = Executors.newFixedThreadPool(
-            Integer.parseInt(ConfigManager.instance().getProperty("persistor.threads", "4")));
+            Integer.parseInt(ConfigManager.instance().getProperty("persistor.threads", "1")));
 
     private PersistUtils() {
-        String pname = ConfigManager.instance().getProperty("persistor");
-        dbPath = ConfigManager.instance().getProperty("db.path");
+        String pname = ConfigManager.instance().getProperty("persistor","com.deng.recipes.api.persit.ESPersistor");
+        dbPath = ConfigManager.instance().getProperty("db.path","recipes");
 
         try {
             Class c = Class.forName(pname);

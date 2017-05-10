@@ -26,7 +26,6 @@ import org.springframework.stereotype.Component;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
-@Component
 public class RecipesDAO {
 
     private static Client esClient;
@@ -110,7 +109,7 @@ public class RecipesDAO {
                 .setTypes(RecipeEntity.class.getSimpleName())
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
                 .setFetchSource(true)
-                .addSort("recipe.score", SortOrder.DESC)
+                .addSort("recipe.likedNum", SortOrder.DESC)
                 .setFrom(pageIndex * pageSize)
                 .setSize(pageSize)
                 .get();

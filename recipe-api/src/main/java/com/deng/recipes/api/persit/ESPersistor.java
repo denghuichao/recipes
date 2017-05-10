@@ -22,13 +22,10 @@ import java.util.stream.Collectors;
  * Created by hcdeng on 2017/4/24.
  */
 public class ESPersistor extends Persistor {
+
     private static Client esClient;
 
-    static {
-        init();
-    }
-
-    private static void init() {
+    static  {
         try {
             esClient = new PreBuiltTransportClient(Settings.EMPTY)
                     .addTransportAddress(new InetSocketTransportAddress(
@@ -36,6 +33,7 @@ public class ESPersistor extends Persistor {
                             Integer.parseInt(ConfigManager.instance().getProperty("es.port", "9300"))));
         } catch (Exception e) {
             System.out.println("error when init es");
+            throw new RuntimeException(e);
         }
     }
 
@@ -51,6 +49,7 @@ public class ESPersistor extends Persistor {
         IndexResponse response = esClient.prepareIndex(indexName, typeName, ESUtils.getId(object))
                 .setSource(JSON.toJSONString(object), XContentType.JSON).get();
 
+        System.out.println("index: " + response.getResult());
         return response;
     }
 

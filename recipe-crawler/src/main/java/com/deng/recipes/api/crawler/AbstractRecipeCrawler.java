@@ -62,7 +62,8 @@ public abstract class AbstractRecipeCrawler extends WebCrawler {
             RecipeEntity recipeEntity = processPageContent(html);
             if (recipeEntity != null) {
                 PersistUtils.save(recipeEntity);
-                RecipeSaver.saveHtml(url, html, htmlDir());
+                //正式部署不要保存html
+                //RecipeSaver.saveHtml(url, html, htmlDir());
             } else {
                 System.out.println("something bad happened: " + url);
             }

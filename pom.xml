@@ -22,7 +22,7 @@
         <juint.version>4.11</juint.version>
         <spring.version>4.3.0.RELEASE</spring.version>
         <jackson-core.version>2.7.5</jackson-core.version>
-        <javax.servlet.version>3.0.1</javax.servlet.version>
+        <javax.servlet.version>3.1.0</javax.servlet.version>
         <guava.version>17.0</guava.version>
         <commons-exe.version>1.1</commons-exe.version>
         <log4j.version>2.7</log4j.version>
@@ -31,7 +31,7 @@
         <jsoup.version>1.7.2</jsoup.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-io.version>2.4</commons-io.version>
-        <elasticsearch.version>5.2.2</elasticsearch.version>
+        <elasticsearch.version>5.3.0</elasticsearch.version>
         <fastjson.version>1.2.31</fastjson.version>
         <cpdetector.version>1.0.7</cpdetector.version>
         <jchardet.version>1.0</jchardet.version>
@@ -160,9 +160,10 @@
                 <version>${spring.version}</version>
             </dependency>
 
+
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 
@@ -218,4 +219,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>

@@ -39,11 +39,11 @@ public class DouguoRecipeExtractor extends RecipeExtractor {
         String title = tmp.text();
 
         recipe.setTitle(title);
-        System.out.println(title);
+        ////System.out.println(title);
 
         String desc = doc.select("div.xtip").text();
         recipe.setDesc(desc);
-        System.out.println(desc);
+        ////System.out.println(desc);
 
         String img = doc.select("div.bmayi.mbm img").attr("src");
         recipe.setImages(Arrays.asList(img));
@@ -53,7 +53,7 @@ public class DouguoRecipeExtractor extends RecipeExtractor {
         recipe.setCollectedNum((Integer.parseInt(view) * 3 + Integer.parseInt(collection) * 7) / 10);
 
         String tips = doc.select("div.xtieshi p").text();
-        System.out.println(tips);
+        ////System.out.println(tips);
         recipe.setTips(tips);
 
         return true;
@@ -68,7 +68,7 @@ public class DouguoRecipeExtractor extends RecipeExtractor {
             String sImg = e.select("a.cboxElement img").attr("original");
             String oStr = e.select("span.fwb").text();
             String sDesc = e.select("p").text().substring(oStr.length());
-            System.out.println(sDesc + "->" + sImg);
+            ////System.out.println(sDesc + "->" + sImg);
             cookSteps.add(new CookStep(i + 1, sDesc, sImg));
         }
         return cookSteps;
@@ -102,7 +102,7 @@ public class DouguoRecipeExtractor extends RecipeExtractor {
                 recipe.addIngredient(new Ingredient(key, value, url));
             }
 
-            System.out.println(key + " --> " + value + " ->" + url);
+            ////System.out.println(key + " --> " + value + " ->" + url);
         }
     }
 }

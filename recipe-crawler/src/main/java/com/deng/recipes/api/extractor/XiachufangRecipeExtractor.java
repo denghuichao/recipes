@@ -33,24 +33,24 @@ public class XiachufangRecipeExtractor extends RecipeExtractor {
         String title = doc.select("h1.page-title").text();
         if (Strings.isNullOrEmpty(title)) return null;
         recipe.setTitle(title);
-        System.out.println(title);
+        //System.out.println(title);
 
         // <div class="cover image expandable block-negative-margin"
         String img = doc.select("div.cover.image.expandable.block-negative-margin img").attr("src");
         recipe.setImages(Arrays.asList(img));
-        System.out.println(img);
+        //System.out.println(img);
 
         String ratingValue = doc.select("div.score.float-left span.number").text();
-        System.out.println(ratingValue);
+        //System.out.println(ratingValue);
         if (!Strings.isNullOrEmpty(ratingValue)) recipe.setScore(Float.parseFloat(ratingValue));
 
         String cookedNunm = doc.select("div.cooked.float-left span.number").text();
-        System.out.println(cookedNunm);
+        //System.out.println(cookedNunm);
         if (!Strings.isNullOrEmpty(cookedNunm))
             recipe.setCookedNum(Integer.parseInt(cookedNunm));
 
         String desc = doc.select("div.desc.mt30").text();
-        System.out.println(desc);
+        //System.out.println(desc);
         recipe.setDesc(desc);
 
         Elements trs = doc.select("div.ings tr");
@@ -60,7 +60,7 @@ public class XiachufangRecipeExtractor extends RecipeExtractor {
             String key = tr.select("td.name a").text();
             String url = BASE_URL + tr.select("td.name a").attr("href");
             String value = tr.select("td.unit").text();
-            System.out.println(key + ":" + value + "-->" + url);
+            //System.out.println(key + ":" + value + "-->" + url);
             ingredients.add(new Ingredient(key, value, url));
         }
 
@@ -71,12 +71,12 @@ public class XiachufangRecipeExtractor extends RecipeExtractor {
             Element e = tmp.get(i);
             String sDesc = e.select("p.text").text();
             String sImg = e.select("img").attr("src");
-            System.out.println(sDesc + ":" + sImg);
+            //System.out.println(sDesc + ":" + sImg);
             cookSteps.add(new CookStep(i + 1, sDesc, sImg));
         }
 
         String tips = doc.select("div.tip").text();
-        System.out.println(tips);
+        //System.out.println(tips);
         recipe.setTips(tips);
 
         return new RecipeEntity(recipe, cookSteps);

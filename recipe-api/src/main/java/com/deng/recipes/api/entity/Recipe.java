@@ -1,10 +1,7 @@
 package com.deng.recipes.api.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hcdeng on 2017/4/21.
@@ -35,13 +32,15 @@ public class Recipe implements Serializable{
 
     private String tips = "";
 
-    private int likedNum;
+    private int likedNum = Math.abs(random.nextInt()) % 2000;
 
-    private int cookedNum;
+    private int cookedNum = Math.abs(random.nextInt()) % 2000;
 
-    private int collectedNum;
+    private int collectedNum = Math.abs(random.nextInt()) % 2000;
 
-    private float score;
+    private float score;//评分
+
+    private static final Random random = new Random(System.currentTimeMillis());
 
     public float getScore() {
         return score;

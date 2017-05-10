@@ -4,13 +4,15 @@ import com.deng.recipes.api.entity.subscriber.NumberSubscriberResultInfo;
 import com.deng.recipes.api.entity.subscriber.RecipeSubscriberResultInfo;
 import com.deng.recipes.api.ws.dao.RecipesDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@EnableAutoConfiguration
+@RequestMapping("/restapi")
 public class SearchRestController {
 
-	@Autowired
-	RecipesDAO recipesDAO;
+	private static final RecipesDAO recipesDAO = new RecipesDAO();
 
 	@GetMapping("/recipes/recommendation")
 	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {

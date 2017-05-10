@@ -27,18 +27,18 @@ public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
 
         String title = doc.select("h1.recipe_De_title").text();
         recipe.setTitle(title);
-        System.out.println(title);
+        //System.out.println(title);
 
         Element de = doc.getElementById("block_txt1");
         if (de != null) {
             String desc = de.text();//.select("div.");
             recipe.setDesc(desc);
-            System.out.println(desc);
+            //System.out.println(desc);
         }
 
         String mainUrl = doc.select("a.J_photo > img").attr("src");
         recipe.setImages(Arrays.asList(mainUrl));
-        System.out.println(mainUrl);
+        //System.out.println(mainUrl);
 
         //<div id="path" class="clear">
         extractTags(recipe, doc);
@@ -51,7 +51,7 @@ public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
 
         String tips = doc.select("div.recipeTip").text();
         recipe.setTips(tips);
-        System.out.println(tips);
+        //System.out.println(tips);
         return steps.size() == 0 ? null : new RecipeEntity(recipe, steps);
     }
 
@@ -74,7 +74,7 @@ public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
             String url = e.select("div.recipeStep_img img").attr("src");
             String stepDesc = e.select("div.recipeStep_word").text().replaceFirst("^\\d+", "");
             String step = e.select("div.recipeStep_num").text();
-            System.out.println(step + ":" + stepDesc + "->" + url);
+            //System.out.println(step + ":" + stepDesc + "->" + url);
             int order = i;
             if (step.matches("\\d+")) order = Integer.parseInt(step);
             steps.add(new CookStep(order, stepDesc, url));
@@ -89,7 +89,7 @@ public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
             String value = e.select("span.category_s1").text();
             String key = e.select("span.category_s2").text();
 
-            System.out.println(key + ":" + value);
+            //System.out.println(key + ":" + value);
 
             if ("口味".equals(key)) recipe.setTaste(value);
             else if ("工艺".equals(key)) recipe.setCookMethod(value);
@@ -105,7 +105,7 @@ public class MeishitianxiaRecipeExtractor extends RecipeExtractor {
             String iName = e.select("span.category_s1").text();
             String url = e.select("a").attr("href");
             String iQuality = e.select("span.category_s2").text();
-            System.out.println(iName + ":" + iQuality + "->" + url);
+            //System.out.println(iName + ":" + iQuality + "->" + url);
             recipe.addIngredient(new Ingredient(iName, iQuality, url));
         }
     }

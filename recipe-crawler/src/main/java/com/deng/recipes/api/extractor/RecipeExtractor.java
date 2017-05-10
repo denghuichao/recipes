@@ -19,13 +19,13 @@ public abstract class RecipeExtractor implements Extractor<RecipeEntity, String>
                 processAllRecipes(f);
             }
         } else {
-            System.out.println(fs.getAbsolutePath());
+            //System.out.println(fs.getAbsolutePath());
             String content = FileUtils.readFile(fs.getAbsolutePath());
             RecipeEntity entity = extract(content);
             if (entity != null) {
                 PersistUtils.save(entity);
             } else {
-                System.out.println(fs.getAbsolutePath() + " is not a recipe");
+                //System.out.println(fs.getAbsolutePath() + " is not a recipe");
                 fs.delete();
             }
         }
