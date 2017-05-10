@@ -27,7 +27,7 @@
           <element id="library" level="project" name="Maven: antlr:antlr:2.7.7" />
           <element id="library" level="project" name="Maven: junit:junit:4.11" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:17.0" />
-          <element id="library" level="project" name="Maven: org.elasticsearch:elasticsearch:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch:elasticsearch:5.2.2" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:6.4.1" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-analyzers-common:6.4.1" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-backward-codecs:6.4.1" />
@@ -54,10 +54,10 @@
           <element id="library" level="project" name="Maven: com.tdunning:t-digest:3.0" />
           <element id="library" level="project" name="Maven: org.hdrhistogram:HdrHistogram:2.1.6" />
           <element id="library" level="project" name="Maven: net.java.dev.jna:jna:4.2.2" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.client:transport:5.3.0" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:transport-netty3-client:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.client:transport:5.2.2" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:transport-netty3-client:5.2.2" />
           <element id="library" level="project" name="Maven: io.netty:netty:3.10.6.Final" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:transport-netty4-client:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:transport-netty4-client:5.2.2" />
           <element id="library" level="project" name="Maven: io.netty:netty-buffer:4.1.7.Final" />
           <element id="library" level="project" name="Maven: io.netty:netty-codec:4.1.7.Final" />
           <element id="library" level="project" name="Maven: io.netty:netty-codec-http:4.1.7.Final" />
@@ -65,16 +65,16 @@
           <element id="library" level="project" name="Maven: io.netty:netty-handler:4.1.7.Final" />
           <element id="library" level="project" name="Maven: io.netty:netty-resolver:4.1.7.Final" />
           <element id="library" level="project" name="Maven: io.netty:netty-transport:4.1.7.Final" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:reindex-client:5.3.0" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.client:rest:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:reindex-client:5.2.2" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.client:rest:5.2.2" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.5" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.2" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.5" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:lang-mustache-client:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:lang-mustache-client:5.2.2" />
           <element id="library" level="project" name="Maven: com.github.spullara.mustache.java:compiler:0.9.3" />
-          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:percolator-client:5.3.0" />
+          <element id="library" level="project" name="Maven: org.elasticsearch.plugin:percolator-client:5.2.2" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.7" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.7" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.7" />
