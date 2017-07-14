@@ -18,10 +18,14 @@ public class RecipeSaver {
 
     private static Executor recipeSaver;
 
+    private static volatile  boolean running = true;
+
     static {
         recipeSaver = Executors.newCachedThreadPool();
         recipeSaver.execute(new RecipeEntitySaver());
     }
+
+    public static void stop(){running = false;}
 
     public static void saveRecipe(RecipeEntity recipeEntity, String dirPath) {
         String content = JSON.toJSONString(recipeEntity);
@@ -55,7 +59,7 @@ public class RecipeSaver {
     private static class RecipeEntitySaver implements Runnable {
         @Override
         public void run() {
-            while (true) {
+            while (running) {
                 SaveRequest request = null;
                 try {
                     request = recipeProvider.take();

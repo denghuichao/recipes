@@ -128,10 +128,10 @@ public class RecipesDAO {
         ArrayList<RecipeEntity> res = Lists.newArrayList();
         SearchHit[] hits = response.getHits().getHits();
         for (SearchHit hit : hits) {
-            System.out.print(hit.getScore() + ":");
+            //System.out.print(hit.getScore() + ":");
             ObjectMapper mapper = new ObjectMapper();
             RecipeEntity e = mapper.convertValue(hit.getSource(), RecipeEntity.class);
-            System.out.println(e.getRecipe().getTitle());
+            //System.out.println(e.getRecipe().getTitle());
             res.add(e);
         }
 

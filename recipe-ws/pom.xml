@@ -66,10 +66,43 @@
             <version>1.5.3.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.ctrip.tourtailor</groupId>
+            <artifactId>commom-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>com.ctrip.tourtailor</groupId>
+                            <artifactId>commom-utils</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <complianceLevel>1.7</complianceLevel>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <showWeaveInfo>true</showWeaveInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin><!-- Include if you want to make an executable jar[FAT JAR which includes all  dependencies along with sprinboot loader] that you can run on commandline using java -jar NAME -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -81,6 +114,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>

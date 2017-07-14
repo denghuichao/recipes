@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AjcSettings">
+    <option name="ajcPath" value="$MAVEN_REPOSITORY$/org/aspectj/aspectjtools/1.8.7/aspectjtools-1.8.7.jar" />
+    <option name="delegateToJavac" value="true" />
+  </component>
   <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="ajc" />
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -16,7 +21,7 @@
       <module name="recipe-api" target="1.8" />
       <module name="recipe-crawler" target="1.8" />
       <module name="recipe-search" target="1.8" />
-      <module name="recipe-ws" target="1.8" />
+      <module name="recipe-ws" target="1.7" />
       <module name="recipes" target="1.8" />
     </bytecodeTargetLevel>
   </component>

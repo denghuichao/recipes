@@ -1,12 +1,13 @@
 package com.deng.recipes.api.ws.controller;
 
+import com.ctrip.tourtailor.aspects.Loggable;
 import com.deng.recipes.api.entity.subscriber.NumberSubscriberResultInfo;
 import com.deng.recipes.api.entity.subscriber.RecipeSubscriberResultInfo;
 import com.deng.recipes.api.ws.dao.RecipesDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+@Loggable
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/restapi")
@@ -14,13 +15,18 @@ public class SearchRestController {
 
 	private static final RecipesDAO recipesDAO = new RecipesDAO();
 
+    @GetMapping("/recipes/{id}")
+    public RecipeSubscriberResultInfo getRecipeById(@PathVariable String id) {
+        return recipesDAO.queryRecipeById(id);
+    }
+
 	@GetMapping("/recipes/recommendation")
 	public RecipeSubscriberResultInfo getRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size) {
 		return recipesDAO.queryHotRecipes(page_index, page_size);
 	}
 
 	@GetMapping("/recipes/search")
-	public RecipeSubscriberResultInfo searchRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size,String queryString){
+	public RecipeSubscriberResultInfo searchRecipes(@RequestParam Integer page_index, @RequestParam Integer page_size,@RequestParam String queryString){
 		return recipesDAO.queryRecipes(queryString, page_index, page_size);
 	}
 
