@@ -17,12 +17,12 @@ public class FileUtils {
     }
 
     public static boolean saveFile(String content, String path, String fileName) {
-        if(makeDir(path))
-            return saveFile(content, path+"/"+fileName);
+        if (makeDir(path))
+            return saveFile(content, path + "/" + fileName);
         else return false;
     }
 
-    public static boolean makeDir(String path){
+    public static boolean makeDir(String path) {
         File dir = null;
         boolean res = true;
         try {
@@ -39,14 +39,19 @@ public class FileUtils {
     }
 
     public static boolean saveFile(String content, String fileName) {
+        FileWriter writer = null;
         try {
-            FileWriter writer = new FileWriter(fileName);
+            writer = new FileWriter(fileName);
             writer.write(content);
             writer.close();
             return true;
         } catch (IOException e) {
             System.out.println("fail to save file " + e.getMessage());
             return false;
+        } finally {
+            if (writer != null) try {
+                writer.close();
+            } catch (IOException e) {}
         }
     }
 
@@ -59,15 +64,25 @@ public class FileUtils {
         return url.hashCode() + url.substring(dotIdx);
     }
 
-    public static String readFile(String fileName) throws IOException {
+    public static String readFile(String fileName) {
         String charset = getFileCharSet(fileName);
         StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), charset));
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            sb.append(line);
+        FileInputStream fis = null;
+        BufferedReader br = null;
+        try {
+             fis = new FileInputStream(fileName);
+             br = new BufferedReader(new InputStreamReader(fis, charset));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (fis != null) try {
+                fis.close();
+            } catch (IOException e) {}
         }
-        br.close();
 
         return sb.toString();
     }
